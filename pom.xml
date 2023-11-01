@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ivanov</groupId>
-    <artifactId>spring-boot-web</artifactId>
+    <artifactId>spring-boot-data-JPA</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-boot-web</name>
-    <description>spring-boot-web</description>
+    <name>spring-boot-data-JPA</name>
+    <description>spring-boot-data-JPA</description>
     <properties>
         <java.version>17</java.version>
         <maven.checkstyle.plugin.configLocation>checkstyle.xml</maven.checkstyle.plugin.configLocation>
@@ -41,6 +41,16 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.32</version>
+        </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>${liquibase.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-maven-plugin</artifactId>
+            <version>${liquibase.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -117,5 +127,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

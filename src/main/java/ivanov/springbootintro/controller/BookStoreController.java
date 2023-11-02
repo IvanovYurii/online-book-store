@@ -1,6 +1,7 @@
 package ivanov.springbootintro.controller;
 
 import ivanov.springbootintro.dto.BookDto;
+import ivanov.springbootintro.dto.BookSearchParameters;
 import ivanov.springbootintro.dto.CreateBookRequestDto;
 import ivanov.springbootintro.service.BookService;
 import java.util.List;
@@ -47,5 +48,10 @@ public class BookStoreController {
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         bookService.deleteById(id);
+    }
+
+    @GetMapping("/search")
+    public List<BookDto> search(BookSearchParameters searchParameters) {
+        return bookService.search(searchParameters);
     }
 }

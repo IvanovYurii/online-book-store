@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ivanov</groupId>
-    <artifactId>spring-boot-data-JPA</artifactId>
+    <artifactId>criteria-query-in-spring-boot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-boot-data-JPA</name>
-    <description>spring-boot-data-JPA</description>
+    <name>criteria-query-in-spring-boot</name>
+    <description>criteria-query-in-spring-boot</description>
     <properties>
         <java.version>17</java.version>
         <maven.checkstyle.plugin.configLocation>checkstyle.xml</maven.checkstyle.plugin.configLocation>

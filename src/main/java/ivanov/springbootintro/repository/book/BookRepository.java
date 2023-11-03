@@ -1,4 +1,4 @@
-package ivanov.springbootintro.repository;
+package ivanov.springbootintro.repository.book;
 
 import ivanov.springbootintro.model.Book;
 import org.springframework.data.jpa.repository.JpaRepository;

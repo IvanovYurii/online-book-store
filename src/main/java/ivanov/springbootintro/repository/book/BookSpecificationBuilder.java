@@ -1,6 +1,6 @@
 package ivanov.springbootintro.repository.book;
 
-import ivanov.springbootintro.dto.BookSearchParameters;
+import ivanov.springbootintro.dto.book.BookSearchParameters;
 import ivanov.springbootintro.model.Book;
 import ivanov.springbootintro.repository.SpecificationBuilder;
 import ivanov.springbootintro.repository.SpecificationProviderManager;

@@ -2,9 +2,9 @@ package ivanov.springbootintro.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import ivanov.springbootintro.dto.BookDto;
-import ivanov.springbootintro.dto.BookSearchParameters;
-import ivanov.springbootintro.dto.CreateBookRequestDto;
+import ivanov.springbootintro.dto.book.BookDto;
+import ivanov.springbootintro.dto.book.BookSearchParameters;
+import ivanov.springbootintro.dto.book.CreateBookRequestDto;
 import ivanov.springbootintro.service.BookService;
 import jakarta.validation.Valid;
 import java.util.List;

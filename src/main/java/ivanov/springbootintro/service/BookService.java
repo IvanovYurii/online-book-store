@@ -1,8 +1,8 @@
 package ivanov.springbootintro.service;
 
-import ivanov.springbootintro.dto.BookDto;
-import ivanov.springbootintro.dto.BookSearchParameters;
-import ivanov.springbootintro.dto.CreateBookRequestDto;
+import ivanov.springbootintro.dto.book.BookDto;
+import ivanov.springbootintro.dto.book.BookSearchParameters;
+import ivanov.springbootintro.dto.book.CreateBookRequestDto;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 

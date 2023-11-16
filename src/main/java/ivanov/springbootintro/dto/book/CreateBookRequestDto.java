@@ -1,4 +1,4 @@
-package ivanov.springbootintro.dto;
+package ivanov.springbootintro.dto.book;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -7,9 +7,7 @@ import java.math.BigDecimal;
 import lombok.Data;
 
 @Data
-public class BookDto {
-    @NotNull
-    private Long id;
+public class CreateBookRequestDto {
     @NotEmpty
     private String title;
     @NotEmpty

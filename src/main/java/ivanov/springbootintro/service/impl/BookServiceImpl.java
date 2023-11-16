@@ -1,8 +1,8 @@
 package ivanov.springbootintro.service.impl;
 
-import ivanov.springbootintro.dto.BookDto;
-import ivanov.springbootintro.dto.BookSearchParameters;
-import ivanov.springbootintro.dto.CreateBookRequestDto;
+import ivanov.springbootintro.dto.book.BookDto;
+import ivanov.springbootintro.dto.book.BookSearchParameters;
+import ivanov.springbootintro.dto.book.CreateBookRequestDto;
 import ivanov.springbootintro.exception.EntityNotFoundException;
 import ivanov.springbootintro.mapper.BookMapper;
 import ivanov.springbootintro.model.Book;

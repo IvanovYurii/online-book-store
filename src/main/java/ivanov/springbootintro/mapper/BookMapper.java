@@ -1,8 +1,8 @@
 package ivanov.springbootintro.mapper;
 
 import ivanov.springbootintro.config.MapperConfig;
-import ivanov.springbootintro.dto.BookDto;
-import ivanov.springbootintro.dto.CreateBookRequestDto;
+import ivanov.springbootintro.dto.book.BookDto;
+import ivanov.springbootintro.dto.book.CreateBookRequestDto;
 import ivanov.springbootintro.model.Book;
 import org.mapstruct.Mapper;
 

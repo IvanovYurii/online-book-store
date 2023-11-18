@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-users-data
+      author: Ivanov Yurii
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column: {name: email, value: 'john.doe@example.com'}
+              - column: {name: password, value: 'password123'}
+              - column: {name: first_name, value: 'John'}
+              - column: {name: last_name, value: 'Doe'}
+              - column: {name: shipping_address, value: '123 Main St'}
+
+        - insert:
+            tableName: users
+            columns:
+              - column: {name: email, value: 'jane.smith@example.com'}
+              - column: {name: password, value: 'securepass'}
+              - column: {name: first_name, value: 'Jane'}
+              - column: {name: last_name, value: 'Smith'}
+              - column: {name: shipping_address, value: '456 Oak St'}
+
+        - insert:
+            tableName: users
+            columns:
+              - column: {name: email, value: 'bob.jones@example.com'}
+              - column: {name: password, value: 'bobspassword'}
+              - column: {name: first_name, value: 'Bob'}
+              - column: {name: last_name, value: 'Jones'}
+              - column: {name: shipping_address, value: '789 Pine St'}

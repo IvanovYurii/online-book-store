@@ -3,3 +3,17 @@ databaseChangeLog:
       file: db/changelog/changes/01-create-books-table.yaml
   - include:
       file: db/changelog/changes/02-create-users-table.yaml
+  - include:
+      file: db/changelog/changes/03-add-books-data.yaml
+  - include:
+      file: db/changelog/changes/04-add-users-data.yaml
+  - include:
+      file: db/changelog/changes/05-set-bcrypt-password.yaml
+  - include:
+      file: db/changelog/changes/06-create-roles-table.yaml
+  - include:
+      file: db/changelog/changes/07-create-table-assign-role-to-user.yaml
+  - include:
+      file: db/changelog/changes/08-add-roles-data.yaml
+  - include:
+      file: db/changelog/changes/09-assign-role-to-user-data.yaml

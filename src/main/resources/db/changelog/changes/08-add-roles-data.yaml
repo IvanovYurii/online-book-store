@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-roles-data
+      author: Ivanov Yurii
+      changes:
+        - insert:
+            tableName: roles
+            columns:
+              - column: {name: role_name, value: 'ROLE_USER'}
+        - insert:
+            tableName: roles
+            columns:
+              - column: {name: role_name, value: 'ROLE_ADMIN'}

@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-roles-table
+      author: Ivanov Yurii
+      changes:
+        - createTable:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: role_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false

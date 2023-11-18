@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-books-data
+      author: Ivanov Yurii
+      changes:
+        - insert:
+            tableName: books
+            columns:
+              - column: {name: title, value: 'The Great Gatsby'}
+              - column: {name: author, value: 'F. Scott Fitzgerald'}
+              - column: {name: isbn, value: '978-0743273565'}
+              - column: {name: price, value: 12.99}
+              - column: {name: description, value: 'A classic novel about the American Dream.'}
+              - column: {name: cover_image, value: 'gatsby.jpg'}
+
+        - insert:
+            tableName: books
+            columns:
+              - column: {name: title, value: 'To Kill a Mockingbird'}
+              - column: {name: author, value: 'Harper Lee'}
+              - column: {name: isbn, value: '978-0061120084'}
+              - column: {name: price, value: 15.99}
+              - column: {name: description, value: 'A powerful story of racial injustice in the American South.'}
+              - column: {name: cover_image, value: 'mockingbird.jpg'}
+
+        - insert:
+            tableName: books
+            columns:
+              - column: {name: title, value: '1984'}
+              - column: {name: author, value: 'George Orwell'}
+              - column: {name: isbn, value: '978-0451524935'}
+              - column: {name: price, value: 10.99}
+              - column: {name: description, value: 'A dystopian novel depicting a totalitarian society.'}
+              - column: {name: cover_image, value: '1984.jpg'}
+
+        - insert:
+            tableName: books
+            columns:
+              - column: {name: title, value: 'Pride and Prejudice'}
+              - column: {name: author, value: 'Jane Austen'}
+              - column: {name: isbn, value: '978-0141439518'}
+              - column: {name: price, value: 14.99}
+              - column: {name: description, value: 'A classic romantic novel set in early 19th-century England.'}
+              - column: {name: cover_image, value: 'pride_prejudice.jpg'}
+
+        - insert:
+            tableName: books
+            columns:
+              - column: {name: title, value: 'The Catcher in the Rye'}
+              - column: {name: author, value: 'J.D. Salinger'}
+              - column: {name: isbn, value: '978-0241950425'}
+              - column: {name: price, value: 11.99}
+              - column: {name: description, value: 'A novel about the struggles of adolescence and identity.'}
+              - column: {name: cover_image, value: 'catcher.jpg'}
+
+        - insert:
+            tableName: books
+            columns:
+              - column: {name: title, value: 'The Hobbit'}
+              - column: {name: author, value: 'J.R.R. Tolkien'}
+              - column: {name: isbn, value: '978-0547928227'}
+              - column: {name: price, value: 18.99}
+              - column: {name: description, value: 'A fantasy adventure novel.'}
+              - column: {name: cover_image, value: 'hobbit.jpg'}

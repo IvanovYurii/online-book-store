@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableMethodSecurity
@@ -49,7 +50,10 @@ public class SecurityConfig {
                         SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthenticationFilter,
                         UsernamePasswordAuthenticationFilter.class)
-                .userDetailsService(userDetailsService);
+                .userDetailsService(userDetailsService)
+                .exceptionHandling(configurer -> configurer.authenticationEntryPoint(
+                        new Http403ForbiddenEntryPoint())
+                );
         return http.build();
     }
 

@@ -4,6 +4,7 @@ import ivanov.springbootintro.dto.book.BookDto;
 import ivanov.springbootintro.dto.book.BookSearchParameters;
 import ivanov.springbootintro.dto.book.CreateBookRequestDto;
 import ivanov.springbootintro.exception.EntityNotFoundException;
+import ivanov.springbootintro.exception.RegistrationException;
 import ivanov.springbootintro.mapper.BookMapper;
 import ivanov.springbootintro.model.Book;
 import ivanov.springbootintro.repository.book.BookRepository;
@@ -23,7 +24,11 @@ public class BookServiceImpl implements BookService {
     private final BookSpecificationBuilder bookSpecificationBuilder;
 
     @Override
-    public BookDto save(CreateBookRequestDto requestDto) {
+    public BookDto save(CreateBookRequestDto requestDto) throws RegistrationException {
+        if (bookRepository.findByIsbn(requestDto.getIsbn()).isPresent()) {
+            throw new RegistrationException("Book with Isbn " + requestDto.getIsbn()
+                    + " is all ready present");
+        }
         Book book = bookMapper.toModel(requestDto);
         return bookMapper.toDto(bookRepository.save(book));
     }
@@ -44,6 +49,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDto updateById(CreateBookRequestDto requestDto, Long id) {
+        bookRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Can't find book by id=" + id));
         Book book = bookMapper.toModel(requestDto);
         book.setId(id);
         return bookMapper.toDto(bookRepository.save(book));
@@ -51,6 +58,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void deleteById(Long id) {
+        bookRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Can't find book by id=" + id));
         bookRepository.deleteById(id);
     }
 

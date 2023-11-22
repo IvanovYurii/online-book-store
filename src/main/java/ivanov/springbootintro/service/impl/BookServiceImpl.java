@@ -51,6 +51,10 @@ public class BookServiceImpl implements BookService {
     public BookDto updateById(CreateBookRequestDto requestDto, Long id) {
         bookRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Can't find book by id=" + id));
+        if (bookRepository.findByIsbn(requestDto.getIsbn()).isPresent()) {
+            throw new EntityAllReadyPresentException("Book with Isbn " + requestDto.getIsbn()
+                    + " is all ready present");
+        }
         Book book = bookMapper.toModel(requestDto);
         book.setId(id);
         return bookMapper.toDto(bookRepository.save(book));

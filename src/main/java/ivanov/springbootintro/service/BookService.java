@@ -3,12 +3,11 @@ package ivanov.springbootintro.service;
 import ivanov.springbootintro.dto.book.BookDto;
 import ivanov.springbootintro.dto.book.BookSearchParameters;
 import ivanov.springbootintro.dto.book.CreateBookRequestDto;
-import ivanov.springbootintro.exception.RegistrationException;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 
 public interface BookService {
-    BookDto save(CreateBookRequestDto requestDto) throws RegistrationException;
+    BookDto save(CreateBookRequestDto requestDto);
 
     List<BookDto> findAll(Pageable pageable);
 

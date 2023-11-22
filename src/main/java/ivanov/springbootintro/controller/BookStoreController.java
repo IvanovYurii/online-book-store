@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import ivanov.springbootintro.dto.book.BookDto;
 import ivanov.springbootintro.dto.book.BookSearchParameters;
 import ivanov.springbootintro.dto.book.CreateBookRequestDto;
-import ivanov.springbootintro.exception.RegistrationException;
 import ivanov.springbootintro.service.BookService;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -47,8 +46,7 @@ public class BookStoreController {
     @PostMapping
     @Operation(summary = "Create a new book", description = "Create a new book")
     public BookDto create(Authentication authentication,
-                          @RequestBody @Valid CreateBookRequestDto requestDto)
-            throws RegistrationException {
+                          @RequestBody @Valid CreateBookRequestDto requestDto) {
         return bookService.save(requestDto);
     }
 

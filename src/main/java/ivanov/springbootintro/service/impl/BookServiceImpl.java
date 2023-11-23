@@ -3,7 +3,7 @@ package ivanov.springbootintro.service.impl;
 import ivanov.springbootintro.dto.book.BookDto;
 import ivanov.springbootintro.dto.book.BookSearchParameters;
 import ivanov.springbootintro.dto.book.CreateBookRequestDto;
-import ivanov.springbootintro.exception.EntityAllReadyPresentException;
+import ivanov.springbootintro.exception.EntityAlreadyPresentException;
 import ivanov.springbootintro.exception.EntityNotFoundException;
 import ivanov.springbootintro.mapper.BookMapper;
 import ivanov.springbootintro.model.Book;
@@ -26,7 +26,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookDto save(CreateBookRequestDto requestDto) {
         if (bookRepository.findByIsbn(requestDto.getIsbn()).isPresent()) {
-            throw new EntityAllReadyPresentException("Book with Isbn " + requestDto.getIsbn()
+            throw new EntityAlreadyPresentException("Book with Isbn " + requestDto.getIsbn()
                     + " is all ready present");
         }
         Book book = bookMapper.toModel(requestDto);

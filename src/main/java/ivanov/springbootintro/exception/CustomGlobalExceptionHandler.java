@@ -57,10 +57,10 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(EntityAllReadyPresentException.class)
+    @ExceptionHandler(EntityAlreadyPresentException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ResponseEntity<String> handleEntityAllReadyPresentException(
-            EntityAllReadyPresentException ex) {
+            EntityAlreadyPresentException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
     }
 

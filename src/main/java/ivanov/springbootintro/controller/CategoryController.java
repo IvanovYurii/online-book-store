@@ -41,7 +41,7 @@ public class CategoryController {
     @Operation(summary = "Find category by id",
             description = "Retrieve a specific category by its ID")
     public CategoryDto getCategoryById(Authentication authentication,
-                                       @PathVariable @Valid Long id) {
+                                       @PathVariable Long id) {
         return categoryService.getById(id);
     }
 
@@ -49,7 +49,7 @@ public class CategoryController {
     @Operation(summary = "List books by category",
             description = "Retrieve books by a specific category")
     public List<BookDtoWithoutCategoryIds> getBooksByCategoryId(Authentication authentication,
-                                                                @PathVariable @Valid Long id) {
+                                                                @PathVariable Long id) {
         return categoryService.getBooksByCategoryId(id);
     }
 
@@ -66,7 +66,7 @@ public class CategoryController {
     @Operation(summary = "Update a specific category",
             description = "Update category by available id")
     public CategoryDto updateCategory(Authentication authentication,
-                                      @PathVariable @Valid Long id,
+                                      @PathVariable Long id,
                                       @RequestBody @Valid CreateCategoryRequestDto requestDto
     ) {
         return categoryService.updateById(requestDto, id);
@@ -76,7 +76,7 @@ public class CategoryController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete category by id", description = "Delete category by available id")
-    public void deleteCategory(Authentication authentication, @PathVariable @Valid Long id) {
+    public void deleteCategory(Authentication authentication, @PathVariable Long id) {
         categoryService.deleteById(id);
     }
 }

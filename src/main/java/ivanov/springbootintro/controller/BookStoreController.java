@@ -38,7 +38,7 @@ public class BookStoreController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Find book by id", description = "Find book by available id")
-    public BookDto findById(Authentication authentication, @PathVariable Long id) {
+    public BookDto findById(Authentication authentication, @PathVariable @Valid Long id) {
         return bookService.findById(id);
     }
 
@@ -54,8 +54,8 @@ public class BookStoreController {
     @PutMapping("/{id}")
     @Operation(summary = "Update book by id", description = "Update book by available id")
     public BookDto updateById(Authentication authentication,
-                              @RequestBody CreateBookRequestDto requestDto,
-                              @PathVariable Long id) {
+                              @RequestBody @Valid CreateBookRequestDto requestDto,
+                              @PathVariable @Valid Long id) {
         return bookService.updateById(requestDto, id);
     }
 
@@ -63,7 +63,7 @@ public class BookStoreController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete book by id", description = "Delete book by available id")
-    public void deleteById(Authentication authentication, @PathVariable Long id) {
+    public void deleteById(Authentication authentication, @PathVariable @Valid Long id) {
         bookService.deleteById(id);
     }
 

@@ -1,20 +1,20 @@
 databaseChangeLog:
   - changeSet:
-      id: assign-role-to-user-data.yaml
+      id: assign-role-to-user-data
       author: Ivanov Yurii
       changes:
         - insert:
             tableName: users_roles
             columns:
-              - column: {name: user_id, value: 1}
-              - column: {name: roles_id, value: 1}
+              - column: {name: user_id, value: '1'}
+              - column: {name: roles_id, value: '1'}
         - insert:
             tableName: users_roles
             columns:
-              - column: { name: user_id, value: 2 }
-              - column: { name: roles_id, value: 1 }
+              - column: { name: user_id, value: '2' }
+              - column: { name: roles_id, value: '1' }
         - insert:
             tableName: users_roles
             columns:
-              - column: { name: user_id, value: 3 }
-              - column: { name: roles_id, value: 2 }
+              - column: { name: user_id, value: '3' }
+              - column: { name: roles_id, value: '2' }

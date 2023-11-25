@@ -29,7 +29,7 @@ public class BookServiceImpl implements BookService {
             throw new EntityAlreadyPresentException("Book with Isbn " + requestDto.getIsbn()
                     + " is all ready present");
         }
-        Book book = bookMapper.toModel(requestDto);
+        Book book = bookMapper.toEntity(requestDto);
         return bookMapper.toDto(bookRepository.save(book));
     }
 
@@ -51,7 +51,7 @@ public class BookServiceImpl implements BookService {
     public BookDto updateById(CreateBookRequestDto requestDto, Long id) {
         bookRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Can't find book by id=" + id));
-        Book book = bookMapper.toModel(requestDto);
+        Book book = bookMapper.toEntity(requestDto);
         book.setId(id);
         return bookMapper.toDto(bookRepository.save(book));
     }

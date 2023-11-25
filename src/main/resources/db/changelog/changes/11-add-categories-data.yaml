@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-categories-data
+      author: Ivanov Yurii
+      changes:
+        - insert:
+            tableName: categories
+            columns:
+              - column: {name: category_name, value: 'Fiction'}
+              - column: {name: category_description, value: 'Fiction books'}
+        - insert:
+            tableName: categories
+            columns:
+              - column: { name: category_name, value: 'Fantasy' }
+              - column: { name: category_description, value: 'Fantasy books' }
+        - insert:
+            tableName: categories
+            columns:
+              - column: { name: category_name, value: 'Detectives' }
+              - column: { name: category_description, value: 'Detectives books' }
+        - insert:
+            tableName: categories
+            columns:
+              - column: { name: category_name, value: 'Historical' }
+              - column: { name: category_description, value: 'Historical books' }
+        - insert:
+            tableName: categories
+            columns:
+              - column: { name: category_name, value: "Children's" }
+              - column: { name: category_description, value: "Children's books" }

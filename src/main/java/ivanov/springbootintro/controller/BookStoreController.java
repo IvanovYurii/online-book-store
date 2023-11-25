@@ -54,7 +54,7 @@ public class BookStoreController {
     @PutMapping("/{id}")
     @Operation(summary = "Update book by id", description = "Update book by available id")
     public BookDto updateById(Authentication authentication,
-                              @RequestBody CreateBookRequestDto requestDto,
+                              @RequestBody @Valid CreateBookRequestDto requestDto,
                               @PathVariable Long id) {
         return bookService.updateById(requestDto, id);
     }

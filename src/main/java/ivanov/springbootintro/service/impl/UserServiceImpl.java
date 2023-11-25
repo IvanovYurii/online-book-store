@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findByEmail(requestDto.getEmail()).isPresent()) {
             throw new RegistrationException("User is all ready registered");
         }
-        User user = userMapper.toModel(requestDto);
+        User user = userMapper.toEntity(requestDto);
         user.setPassword(passwordEncoder.encode(requestDto.getPassword()));
         return userMapper.toDto(userRepository.save(user));
     }

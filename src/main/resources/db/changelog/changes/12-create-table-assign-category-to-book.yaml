@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-assign-category-to-book
+      author: Ivanov Yurii
+      changes:
+        - createTable:
+            tableName: books_categories
+            columns:
+              - column:
+                  name: book_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: categories_id
+                  type: bigint
+                  constraints:
+                    nullable: false

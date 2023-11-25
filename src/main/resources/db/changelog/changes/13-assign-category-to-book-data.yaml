@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: assign-category-to-book-data
+      author: Ivanov Yurii
+      changes:
+        - insert:
+            tableName: books_categories
+            columns:
+              - column: {name: book_id, value: '1'}
+              - column: {name: categories_id, value: '1'}
+        - insert:
+            tableName: books_categories
+            columns:
+              - column: { name: book_id, value: '2' }
+              - column: { name: categories_id, value: '3' }
+        - insert:
+            tableName: books_categories
+            columns:
+              - column: { name: book_id, value: '2' }
+              - column: { name: categories_id, value: '2' }
+        - insert:
+            tableName: books_categories
+            columns:
+              - column: { name: book_id, value: '3' }
+              - column: { name: categories_id, value: '2' }
+        - insert:
+            tableName: books_categories
+            columns:
+              - column: { name: book_id, value: '4' }
+              - column: { name: categories_id, value: '3' }
+        - insert:
+            tableName: books_categories
+            columns:
+              - column: { name: book_id, value: '5' }
+              - column: { name: categories_id, value: '2' }
+        - insert:
+            tableName: books_categories
+            columns:
+              - column: { name: book_id, value: '6' }
+              - column: { name: categories_id, value: '4' }
+

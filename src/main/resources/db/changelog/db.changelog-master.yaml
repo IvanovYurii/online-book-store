@@ -17,3 +17,11 @@ databaseChangeLog:
       file: db/changelog/changes/08-add-roles-data.yaml
   - include:
       file: db/changelog/changes/09-assign-role-to-user-data.yaml
+  - include:
+      file: db/changelog/changes/10-create-categories-table.yaml
+  - include:
+      file: db/changelog/changes/11-add-categories-data.yaml
+  - include:
+      file: db/changelog/changes/12-create-table-assign-category-to-book.yaml
+  - include:
+      file: db/changelog/changes/13-assign-category-to-book-data.yaml

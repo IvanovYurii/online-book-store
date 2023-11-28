@@ -25,8 +25,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDto save(CreateBookRequestDto requestDto) {
-        if (bookRepository.findByIsbn(requestDto.getIsbn()).isPresent()) {
-            throw new EntityAlreadyPresentException("Book with Isbn " + requestDto.getIsbn()
+        if (bookRepository.findByIsbn(requestDto.isbn()).isPresent()) {
+            throw new EntityAlreadyPresentException("Book with Isbn " + requestDto.isbn()
                     + " is all ready present");
         }
         Book book = bookMapper.toEntity(requestDto);

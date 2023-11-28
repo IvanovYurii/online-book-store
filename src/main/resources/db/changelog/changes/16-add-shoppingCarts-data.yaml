@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-shoppingCarts-data
+      author: Ivanov Yurii
+      changes:
+        - insert:
+            tableName: shopping_carts
+            columns:
+              - column: {name: user_id, value: '1'}
+        - insert:
+            tableName: shopping_carts
+            columns:
+              - column: { name: user_id, value: '2' }
+        - insert:
+            tableName: shopping_carts
+            columns:
+              - column: { name: user_id, value: '3' }

@@ -9,6 +9,7 @@ import ivanov.springbootintro.service.CategoryService;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -33,7 +34,8 @@ public class CategoryController {
     @GetMapping
     @Operation(summary = "Get all categories",
             description = "Get a list of all available categories")
-    public List<CategoryDto> getAll(Authentication authentication, Pageable pageable) {
+    public List<CategoryDto> getAll(Authentication authentication,
+                                    @ParameterObject Pageable pageable) {
         return categoryService.findAll(pageable);
     }
 

@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-cartItems-data
+      author: Ivanov Yurii
+      changes:
+        - insert:
+            tableName: cart_items
+            columns:
+              - column: {name: shopping_carts_id, value: '1'}
+              - column: {name: book_id, value: '1'}
+        - insert:
+            tableName: cart_items
+            columns:
+              - column: { name: shopping_carts_id, value: '1' }
+              - column: { name: book_id, value: '6' }
+        - insert:
+            tableName: cart_items
+            columns:
+              - column: { name: shopping_carts_id, value: '2' }
+              - column: { name: book_id, value: '2' }
+              - column: { name: quantity, value: '2' }
+        - insert:
+            tableName: cart_items
+            columns:
+              - column: { name: shopping_carts_id, value: '3' }
+              - column: { name: book_id, value: '1' }
+              - column: { name: quantity, value: '3' }
+        - insert:
+            tableName: cart_items
+            columns:
+              - column: { name: shopping_carts_id, value: '3' }
+              - column: { name: book_id, value: '3' }
+        - insert:
+            tableName: cart_items
+            columns:
+              - column: { name: shopping_carts_id, value: '3' }
+              - column: { name: book_id, value: '4' }
+              - column: { name: quantity, value: '2' }
+        - insert:
+            tableName: cart_items
+            columns:
+              - column: { name: shopping_carts_id, value: '3' }
+              - column: { name: book_id, value: '5' }

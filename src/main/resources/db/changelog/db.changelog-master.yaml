@@ -25,3 +25,11 @@ databaseChangeLog:
       file: db/changelog/changes/12-create-table-assign-category-to-book.yaml
   - include:
       file: db/changelog/changes/13-assign-category-to-book-data.yaml
+  - include:
+      file: db/changelog/changes/14-create-shoppingCarts-table.yaml
+  - include:
+      file: db/changelog/changes/15-create-cartItems-table.yaml
+  - include:
+      file: db/changelog/changes/16-add-shoppingCarts-data.yaml
+  - include:
+      file: db/changelog/changes/17-add-cartItems-data.yaml

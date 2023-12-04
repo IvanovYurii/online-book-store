@@ -32,27 +32,36 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     private final BookRepository bookRepository;
     private final CartItemRepository cartItemRepository;
 
+    private CartItem findCartItemInShoppingCart(
+            ShoppingCart shoppingCart, Long bookId) {
+        return shoppingCart.getCartItems()
+                .stream()
+                .filter(item -> item.getBook().getId().equals(bookId))
+                .findFirst()
+                .orElseThrow(() ->
+                        new EntityNotFoundException("CartItem not found for bookId: " + bookId));
+    }
+
     @Override
     public ShoppingCartDto getUserShoppingCart(User user, Pageable pageable) {
-        ShoppingCart shoppingCart = getOrCreateUserShoppingCart(user);
+        ShoppingCart shoppingCart = shoppingCartRepository
+                .getShoppingCartByUserEmail(user.getEmail());
         return shoppingCartMapper.toDto(shoppingCart);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public CartItemDto addBookToShoppingCart(User user, AddCartItemRequestDto requestDto) {
+    public CartItemDto addItemToShoppingCart(User user, AddCartItemRequestDto requestDto) {
         Book book = bookRepository.findById(requestDto.bookId()).orElseThrow(
                 () -> new EntityNotFoundException("Can't find book by id="
                         + requestDto.bookId()));
-        ShoppingCart shoppingCart = getOrCreateUserShoppingCart(user);
+        ShoppingCart shoppingCart = shoppingCartRepository
+                .getShoppingCartByUserEmail(user.getEmail());
         Set<Long> bookIds = shoppingCart.getCartItems().stream()
                 .map(cartItem -> cartItem.getBook().getId())
                 .collect(Collectors.toSet());
-
         boolean containsBookId = bookIds.contains(requestDto.bookId());
-
         CartItem cartItem = cartItemMapper.toEntity(requestDto);
-
         if (containsBookId) {
             CartItem existingCartItem = findCartItemInShoppingCart(
                     shoppingCart, book.getId());
@@ -69,10 +78,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public CartItemDto updateCartItemQuantity(User user, Long cartItemId,
-                                              UpdateCartItemQuantityBookRequestDto updateDto) {
-
-        ShoppingCart shoppingCart = getOrCreateUserShoppingCart(user);
+    public CartItemDto updateCartItemQuantity(
+            User user,
+            Long cartItemId,
+            UpdateCartItemQuantityBookRequestDto updateDto) {
+        ShoppingCart shoppingCart = shoppingCartRepository
+                .getShoppingCartByUserEmail(user.getEmail());
         CartItem cartItem = findCartItemInShoppingCart(shoppingCart, cartItemId);
         cartItem.setQuantity(updateDto.quantity());
         cartItemRepository.save(cartItem);
@@ -81,29 +92,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public void deleteBookFromShoppingCart(User user, Long cartItemId) {
-        ShoppingCart shoppingCart = getOrCreateUserShoppingCart(user);
+        ShoppingCart shoppingCart = shoppingCartRepository
+                .getShoppingCartByUserEmail(user.getEmail());
         CartItem cartItem = findCartItemInShoppingCart(shoppingCart, cartItemId);
         cartItemRepository.delete(cartItem);
-    }
-
-    private ShoppingCart getOrCreateUserShoppingCart(User user) {
-        return shoppingCartRepository.getShoppingCartByUserEmail(user.getEmail())
-                .orElseGet(() -> registerNewShoppingCart(user));
-    }
-
-    private CartItem findCartItemInShoppingCart(
-            ShoppingCart shoppingCart, Long bookId) {
-        return shoppingCart.getCartItems()
-                .stream()
-                .filter(item -> item.getBook().getId().equals(bookId))
-                .findFirst()
-                .orElseThrow(() ->
-                        new EntityNotFoundException("CartItem not found for bookId: " + bookId));
-    }
-
-    private ShoppingCart registerNewShoppingCart(User user) {
-        ShoppingCart shoppingCart = new ShoppingCart();
-        shoppingCart.setUser(user);
-        return shoppingCartRepository.save(shoppingCart);
     }
 }

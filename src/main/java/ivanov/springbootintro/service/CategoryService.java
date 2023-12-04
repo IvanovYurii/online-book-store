@@ -7,15 +7,15 @@ import java.util.List;
 import org.springframework.data.domain.Pageable;
 
 public interface CategoryService {
-    CategoryDto save(CreateCategoryRequestDto requestDto);
+    CategoryDto createCategory(CreateCategoryRequestDto requestDto);
 
-    List<CategoryDto> findAll(Pageable pageable);
+    List<CategoryDto> getAllCategories(Pageable pageable);
 
-    CategoryDto getById(Long id);
+    CategoryDto getCategoryById(Long id);
 
-    CategoryDto updateById(CreateCategoryRequestDto requestDto, Long id);
+    CategoryDto updateCategoryById(CreateCategoryRequestDto requestDto, Long id);
 
-    void deleteById(Long id);
+    void deleteCategoryById(Long id);
 
-    List<BookDtoWithoutCategoryIds> getBooksByCategoryId(Long id);
+    List<BookDtoWithoutCategoryIds> getBooksByCategoryId(Long id, Pageable pageable);
 }

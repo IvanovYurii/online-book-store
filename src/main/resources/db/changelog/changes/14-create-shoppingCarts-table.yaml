@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: create-hoppingCarts-table
+      id: create-shoppingCarts-table
       author: Ivanov Yurii
       changes:
         - createTable:

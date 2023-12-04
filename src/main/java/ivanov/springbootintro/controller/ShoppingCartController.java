@@ -9,6 +9,7 @@ import ivanov.springbootintro.dto.shoppingcart.ShoppingCartDto;
 import ivanov.springbootintro.model.User;
 import ivanov.springbootintro.service.ShoppingCartService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
@@ -32,30 +33,51 @@ public class ShoppingCartController {
     private final ShoppingCartService shoppingCartService;
 
     @GetMapping
-    @Operation(summary = "Retrieve user's shopping cart",
-            description = "Retrieve user's shopping cart")
-    public ShoppingCartDto findAll(Authentication authentication,
-                                   @ParameterObject Pageable pageable) {
+    @Operation(
+            summary = "Retrieve user's shopping cart",
+            description = "Retrieve the shopping cart for the authenticated user. "
+                    + "This endpoint requires authentication and returns detailed information "
+                    + "about the user's shopping cart, including cart items with book details, "
+                    + "quantities, and total cost."
+                    + "You can use the 'page' and 'size' query parameters to paginate through the"
+                    + " results."
+    )
+    public ShoppingCartDto getUserShoppingCart(
+            Authentication authentication,
+            @ParameterObject Pageable pageable
+    ) {
         User user = (User) authentication.getPrincipal();
         return shoppingCartService.getUserShoppingCart(user, pageable);
     }
 
     @PostMapping
-    @Operation(summary = "Add book to the shopping cart",
-            description = "Add book to the user's shopping cart")
+    @Operation(
+            summary = "Add book to the shopping cart",
+            description = "Add a book to the user's shopping cart. "
+                    + "This endpoint requires authentication, and the request should include"
+                    + " valid information about the book to be added. The response includes "
+                    + "details about the added cart item, such as cart item ID, book details,"
+                    + " quantity, and total cost."
+    )
     public CartItemDto addItemToShoppingCart(
             Authentication authentication,
-            @RequestBody @Valid AddCartItemRequestDto requestDto) {
+            @RequestBody @Valid AddCartItemRequestDto requestDto
+    ) {
         User user = (User) authentication.getPrincipal();
-        return shoppingCartService.addBookToShoppingCart(user, requestDto);
+        return shoppingCartService.addItemToShoppingCart(user, requestDto);
     }
 
     @PutMapping("/cart-items/{cartItemId}")
-    @Operation(summary = "Update quantity",
-            description = "Update quantity of a book in the shopping cart")
-    public CartItemDto updateById(
+    @Operation(
+            summary = "Update quantity",
+            description = "Update the quantity of a specific book in the user's shopping cart. "
+                    + "This endpoint requires authentication, and the request should include the"
+                    + " updated quantity. The response includes details about the updated cart "
+                    + "item, such as cart item ID, book details, and quantity."
+    )
+    public CartItemDto updateCartItemQuantity(
             Authentication authentication,
-            @PathVariable Long cartItemId,
+            @PathVariable @Min(1) Long cartItemId,
             @RequestBody @Valid UpdateCartItemQuantityBookRequestDto requestDto
     ) {
         User user = (User) authentication.getPrincipal();
@@ -65,8 +87,15 @@ public class ShoppingCartController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/cart-items/{cartItemId}")
     @Operation(summary = "Remove a book from the shopping cart",
-            description = "Remove a book from the shopping cart")
-    public void deleteById(Authentication authentication, @PathVariable Long cartItemId) {
+            description = "Remove a specific book from the user's shopping cart. "
+                    + "This endpoint requires authentication and removes the specified book "
+                    + "from the shopping cart. The response returns no content with an HTTP "
+                    + "status of 204 indicating a successful removal."
+    )
+    public void deleteBookFromShoppingCart(
+            Authentication authentication,
+            @PathVariable @Min(1) Long cartItemId
+    ) {
         User user = (User) authentication.getPrincipal();
         shoppingCartService.deleteBookFromShoppingCart(user, cartItemId);
     }

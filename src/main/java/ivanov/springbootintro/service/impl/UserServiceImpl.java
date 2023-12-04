@@ -4,7 +4,9 @@ import ivanov.springbootintro.dto.user.UserRegistrationRequestDto;
 import ivanov.springbootintro.dto.user.UserResponseDto;
 import ivanov.springbootintro.exception.RegistrationException;
 import ivanov.springbootintro.mapper.UserMapper;
+import ivanov.springbootintro.model.ShoppingCart;
 import ivanov.springbootintro.model.User;
+import ivanov.springbootintro.repository.shoppingcart.ShoppingCartRepository;
 import ivanov.springbootintro.repository.user.UserRepository;
 import ivanov.springbootintro.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -17,15 +19,24 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
+    private final ShoppingCartRepository shoppingCartRepository;
+
+    void registerNewShoppingCart(User user) {
+        ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.setUser(user);
+        shoppingCartRepository.save(shoppingCart);
+    }
 
     @Override
-    public UserResponseDto save(UserRegistrationRequestDto requestDto)
+    public UserResponseDto registerUser(UserRegistrationRequestDto requestDto)
             throws RegistrationException {
         if (userRepository.findByEmail(requestDto.getEmail()).isPresent()) {
             throw new RegistrationException("User is all ready registered");
         }
         User user = userMapper.toEntity(requestDto);
         user.setPassword(passwordEncoder.encode(requestDto.getPassword()));
-        return userMapper.toDto(userRepository.save(user));
+        userRepository.save(user);
+        registerNewShoppingCart(user);
+        return userMapper.toDto(user);
     }
 }

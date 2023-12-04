@@ -48,7 +48,7 @@ public class CategoryController {
     public List<CategoryDto> getAllCategories(
             @ParameterObject Pageable pageable
     ) {
-        return categoryService.getAllCategories(pageable);
+        return categoryService.getAll(pageable);
     }
 
     @GetMapping("/{id}")
@@ -61,7 +61,7 @@ public class CategoryController {
     public CategoryDto getCategoryById(
             @PathVariable @Min(1) Long id
     ) {
-        return categoryService.getCategoryById(id);
+        return categoryService.getById(id);
     }
 
     @GetMapping("/{id}/books")
@@ -91,7 +91,7 @@ public class CategoryController {
     public CategoryDto createCategory(
             @RequestBody @Valid CreateCategoryRequestDto requestDto
     ) {
-        return categoryService.createCategory(requestDto);
+        return categoryService.create(requestDto);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -104,7 +104,7 @@ public class CategoryController {
             @PathVariable @Min(1) Long id,
             @RequestBody @Valid CreateCategoryRequestDto requestDto
     ) {
-        return categoryService.updateCategoryById(requestDto, id);
+        return categoryService.updateById(requestDto, id);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -118,6 +118,6 @@ public class CategoryController {
     public void deleteCategory(
             @PathVariable @Min(1) Long id
     ) {
-        categoryService.deleteCategoryById(id);
+        categoryService.deleteById(id);
     }
 }

@@ -25,16 +25,8 @@ public class BookServiceImpl implements BookService {
     private final BookMapper bookMapper;
     private final BookSpecificationBuilder bookSpecificationBuilder;
 
-    private void validateIsbnUniqueness(String isbn, Long id) {
-        Optional<Book> bookWithSameIsbn = bookRepository.findByIsbn(isbn);
-        if (bookWithSameIsbn.isPresent() && !bookWithSameIsbn.get().getId().equals(id)) {
-            throw new EntityAlreadyPresentException("Book with ISBN "
-                    + isbn + " is already present");
-        }
-    }
-
     @Override
-    public BookDto createBook(CreateBookRequestDto requestDto) {
+    public BookDto create(CreateBookRequestDto requestDto) {
         if (bookRepository.findByIsbn(requestDto.isbn()).isPresent()) {
             throw new EntityAlreadyPresentException("Book with Isbn " + requestDto.isbn()
                     + " is all ready present");
@@ -44,21 +36,21 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDto> findAllBook(Pageable pageable) {
+    public List<BookDto> findAll(Pageable pageable) {
         return bookRepository.findAll(pageable).stream()
                 .map(bookMapper::toDto)
                 .toList();
     }
 
     @Override
-    public BookDto findBookById(Long id) {
+    public BookDto findById(Long id) {
         Book book = bookRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Can't find book by id=" + id));
         return bookMapper.toDto(book);
     }
 
     @Override
-    public BookDto updateBookById(CreateBookRequestDto requestDto, Long id) {
+    public BookDto updateById(CreateBookRequestDto requestDto, Long id) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Can't find book by id=" + id));
         if (requestDto != null) {
@@ -85,7 +77,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void deleteBookById(Long id) {
+    public void deleteById(Long id) {
         bookRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Can't find book by id=" + id));
         bookRepository.deleteById(id);
@@ -98,5 +90,13 @@ public class BookServiceImpl implements BookService {
                 .stream()
                 .map(bookMapper::toDto)
                 .toList();
+    }
+
+    private void validateIsbnUniqueness(String isbn, Long id) {
+        Optional<Book> bookWithSameIsbn = bookRepository.findByIsbn(isbn);
+        if (bookWithSameIsbn.isPresent() && !bookWithSameIsbn.get().getId().equals(id)) {
+            throw new EntityAlreadyPresentException("Book with ISBN "
+                    + isbn + " is already present");
+        }
     }
 }

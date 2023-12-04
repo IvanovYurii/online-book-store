@@ -43,6 +43,6 @@ public class AuthenticationController {
     )
     public UserResponseDto registerUser(@RequestBody @Valid UserRegistrationRequestDto requestDto)
             throws RegistrationException {
-        return userService.registerUser(requestDto);
+        return userService.register(requestDto);
     }
 }

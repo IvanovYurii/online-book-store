@@ -50,7 +50,7 @@ public class BookStoreController {
     public List<BookDto> findAllBooks(
             @ParameterObject Pageable pageable
     ) {
-        return bookService.findAllBook(pageable);
+        return bookService.findAll(pageable);
     }
 
     @GetMapping("/{id}")
@@ -64,7 +64,7 @@ public class BookStoreController {
     public BookDto findBookById(
             @PathVariable @Min(1) Long id
     ) {
-        return bookService.findBookById(id);
+        return bookService.findById(id);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -78,7 +78,7 @@ public class BookStoreController {
     public BookDto createBook(
             @RequestBody @Valid CreateBookRequestDto requestDto
     ) {
-        return bookService.createBook(requestDto);
+        return bookService.create(requestDto);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -92,7 +92,7 @@ public class BookStoreController {
             @RequestBody CreateBookRequestDto requestDto,
             @PathVariable @Min(1) Long id
     ) {
-        return bookService.updateBookById(requestDto, id);
+        return bookService.updateById(requestDto, id);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -106,7 +106,7 @@ public class BookStoreController {
     public void deleteBookById(
             @PathVariable @Min(1) Long id
     ) {
-        bookService.deleteBookById(id);
+        bookService.deleteById(id);
     }
 
     @GetMapping("/search")

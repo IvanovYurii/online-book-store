@@ -32,16 +32,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     private final BookRepository bookRepository;
     private final CartItemRepository cartItemRepository;
 
-    private CartItem findCartItemInShoppingCart(
-            ShoppingCart shoppingCart, Long bookId) {
-        return shoppingCart.getCartItems()
-                .stream()
-                .filter(item -> item.getBook().getId().equals(bookId))
-                .findFirst()
-                .orElseThrow(() ->
-                        new EntityNotFoundException("CartItem not found for bookId: " + bookId));
-    }
-
     @Override
     public ShoppingCartDto getUserShoppingCart(User user, Pageable pageable) {
         ShoppingCart shoppingCart = shoppingCartRepository
@@ -96,5 +86,15 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                 .getShoppingCartByUserEmail(user.getEmail());
         CartItem cartItem = findCartItemInShoppingCart(shoppingCart, cartItemId);
         cartItemRepository.delete(cartItem);
+    }
+
+    private CartItem findCartItemInShoppingCart(
+            ShoppingCart shoppingCart, Long bookId) {
+        return shoppingCart.getCartItems()
+                .stream()
+                .filter(item -> item.getBook().getId().equals(bookId))
+                .findFirst()
+                .orElseThrow(() ->
+                        new EntityNotFoundException("CartItem not found for bookId: " + bookId));
     }
 }

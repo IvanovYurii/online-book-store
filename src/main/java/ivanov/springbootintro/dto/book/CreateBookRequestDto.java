@@ -3,6 +3,7 @@ package ivanov.springbootintro.dto.book;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
+import java.util.Set;
 
 public record CreateBookRequestDto(
         @NotEmpty String title,
@@ -10,6 +11,7 @@ public record CreateBookRequestDto(
         @NotEmpty String isbn,
         @Min(0) BigDecimal price,
         String description,
-        String coverImage
+        String coverImage,
+        Set<Long> categoryIds
 ) {
 }

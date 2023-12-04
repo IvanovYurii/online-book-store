@@ -24,27 +24,27 @@ public class CategoryServiceImpl implements CategoryService {
     private final BookMapper bookMapper;
 
     @Override
-    public CategoryDto save(CreateCategoryRequestDto requestDto) {
+    public CategoryDto createCategory(CreateCategoryRequestDto requestDto) {
         Category category = categoryMapper.toEntity(requestDto);
         return categoryMapper.toDto(categoryRepository.save(category));
     }
 
     @Override
-    public List<CategoryDto> findAll(Pageable pageable) {
+    public List<CategoryDto> getAllCategories(Pageable pageable) {
         return categoryRepository.findAll(pageable).stream()
                 .map(categoryMapper::toDto)
                 .toList();
     }
 
     @Override
-    public CategoryDto getById(Long id) {
+    public CategoryDto getCategoryById(Long id) {
         Category category = categoryRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Can't find category by id=" + id));
         return categoryMapper.toDto(category);
     }
 
     @Override
-    public CategoryDto updateById(CreateCategoryRequestDto requestDto, Long id) {
+    public CategoryDto updateCategoryById(CreateCategoryRequestDto requestDto, Long id) {
         categoryRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Can't find category by id=" + id));
         Category category = categoryMapper.toEntity(requestDto);
@@ -53,14 +53,14 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteCategoryById(Long id) {
         categoryRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Can't find category by id=" + id));
         categoryRepository.deleteById(id);
     }
 
     @Override
-    public List<BookDtoWithoutCategoryIds> getBooksByCategoryId(Long id) {
+    public List<BookDtoWithoutCategoryIds> getBooksByCategoryId(Long id, Pageable pageable) {
         return bookRepository.findAllByCategoriesId(id).stream()
                 .map(bookMapper::toDtoWithoutCategories)
                 .toList();

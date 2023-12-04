@@ -5,6 +5,6 @@ import ivanov.springbootintro.dto.user.UserResponseDto;
 import ivanov.springbootintro.exception.RegistrationException;
 
 public interface UserService {
-    UserResponseDto save(UserRegistrationRequestDto requestDto)
+    UserResponseDto registerUser(UserRegistrationRequestDto requestDto)
             throws RegistrationException;
 }

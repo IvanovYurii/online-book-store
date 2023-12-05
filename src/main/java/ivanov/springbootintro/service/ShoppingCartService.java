@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 public interface ShoppingCartService {
     ShoppingCartDto getUserShoppingCart(User user, Pageable pageable);
 
-    CartItemDto addBookToShoppingCart(User user, AddCartItemRequestDto requestDto);
+    CartItemDto addItemToShoppingCart(User user, AddCartItemRequestDto requestDto);
 
     CartItemDto updateCartItemQuantity(User user, Long cartItemId,
                                        UpdateCartItemQuantityBookRequestDto updateDto);

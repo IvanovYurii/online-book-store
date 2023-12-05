@@ -14,21 +14,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class JwtUtil {
+    private final Key secret;
     @Value("${jwt.expiration}")
     private Long expiration;
-    private final Key secret;
 
     public JwtUtil(@Value("${jwt.secretString}") String secretString) {
         secret = Keys.hmacShaKeyFor(secretString.getBytes(StandardCharsets.UTF_8));
-    }
-
-    private <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolve) {
-        final Claims claims = Jwts.parserBuilder()
-                .setSigningKey(secret)
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-        return claimsResolve.apply(claims);
     }
 
     public String generateToken(String username) {
@@ -54,5 +45,14 @@ public class JwtUtil {
 
     public String getUserName(String token) {
         return getClaimFromToken(token, Claims::getSubject);
+    }
+
+    private <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolve) {
+        final Claims claims = Jwts.parserBuilder()
+                .setSigningKey(secret)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+        return claimsResolve.apply(claims);
     }
 }

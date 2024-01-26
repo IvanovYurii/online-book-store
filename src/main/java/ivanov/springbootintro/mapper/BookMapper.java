@@ -6,6 +6,7 @@ import ivanov.springbootintro.dto.book.BookDtoWithoutCategoryIds;
 import ivanov.springbootintro.dto.book.CreateBookRequestDto;
 import ivanov.springbootintro.model.Book;
 import ivanov.springbootintro.model.Category;
+import java.util.Collections;
 import java.util.stream.Collectors;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
@@ -32,12 +33,16 @@ public interface BookMapper {
 
     @AfterMapping
     default void setCategories(@MappingTarget Book book, CreateBookRequestDto requestDto) {
-        book.setCategories(requestDto.categoryIds().stream()
-                .map(categoryId -> {
-                    Category category = new Category();
-                    category.setId(categoryId);
-                    return category;
-                })
-                .collect(Collectors.toSet()));
+        if (requestDto.categoryIds() != null) {
+            book.setCategories(requestDto.categoryIds().stream()
+                    .map(categoryId -> {
+                        Category category = new Category();
+                        category.setId(categoryId);
+                        return category;
+                    })
+                    .collect(Collectors.toSet()));
+        } else {
+            book.setCategories(Collections.emptySet());
+        }
     }
 }

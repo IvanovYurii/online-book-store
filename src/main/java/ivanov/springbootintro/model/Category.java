@@ -21,7 +21,7 @@ public class Category {
     private Long id;
     @Column(name = "category_name", nullable = false)
     private String name;
-    @Column(name = "category_description", nullable = false)
+    @Column(name = "category_description")
     private String description;
     @Column(nullable = false)
     private Boolean isDeleted = false;

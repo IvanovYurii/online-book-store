@@ -12,6 +12,7 @@ services:
       MYSQL_ROOT_PASSWORD : $MYSQLDB_ROOT_PASSWORD
     ports:
       - "$MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT"
+    command: --innodb-redo-log-capacity=10485760
   app:
     depends_on:
       - db

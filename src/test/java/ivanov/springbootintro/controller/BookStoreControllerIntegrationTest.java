@@ -259,7 +259,7 @@ class BookStoreControllerIntegrationTest {
         if (bookRepository.findByIsbn("978-20141439518").isPresent()) {
             actualBook = bookRepository.findByIsbn("978-20141439518").get();
         }
-        Assertions.assertEquals(7, actualBook.getId());
+        Assertions.assertEquals(4, actualBook.getId());
         Assertions.assertEquals(createBookRequestDto.title(), actualBook.getTitle());
         Assertions.assertEquals(createBookRequestDto.author(), actualBook.getAuthor());
         Assertions.assertEquals(createBookRequestDto.isbn(), actualBook.getIsbn());

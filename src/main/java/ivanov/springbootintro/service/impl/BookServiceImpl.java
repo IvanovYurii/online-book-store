@@ -17,6 +17,7 @@ import ivanov.springbootintro.service.BookService;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -40,7 +41,7 @@ public class BookServiceImpl implements BookService {
                     + requestDto.isbn() + " is already present");
         }
         Book book = new Book();
-        if (requestDto.categoryIds() != null && !requestDto.categoryIds().isEmpty()) {
+        if (Objects.nonNull(requestDto.categoryIds()) && !requestDto.categoryIds().isEmpty()) {
             Set<Category> validCategories = validateCategoryIdsExistence(requestDto.categoryIds());
             book.setCategories(validCategories);
         } else {
@@ -72,8 +73,6 @@ public class BookServiceImpl implements BookService {
         } else {
             book.setIsbn(book.getIsbn());
         }
-        book.setTitle(requestDto.title() != null && !requestDto.title().isEmpty()
-                ? requestDto.title() : book.getTitle());
         book.setTitle(requestDto.title() != null && !requestDto.title().isEmpty()
                 ? requestDto.title() : book.getTitle());
         book.setAuthor(requestDto.author() != null && !requestDto.author().isEmpty()

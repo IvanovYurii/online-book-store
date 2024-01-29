@@ -45,6 +45,15 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(body, headers, status);
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> handleAllOtherExceptions(Exception e) {
+        Map<String, Object> responseBody = new LinkedHashMap<>();
+        responseBody.put("timespan", LocalDateTime.now());
+        responseBody.put("status", HttpStatus.BAD_REQUEST);
+        responseBody.put("exception", e.getMessage());
+        return new ResponseEntity<>(responseBody, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(RegistrationException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ResponseEntity<String> handleRegistrationException(RegistrationException ex) {

@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import ivanov.springbootintro.dto.book.BookDto;
 import ivanov.springbootintro.dto.book.BookSearchParameters;
 import ivanov.springbootintro.dto.book.CreateBookRequestDto;
+import ivanov.springbootintro.dto.book.UpdateBookRequestDto;
 import ivanov.springbootintro.service.BookService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -62,7 +63,7 @@ public class BookStoreController {
                     + "category IDs."
     )
     public BookDto findBookById(
-            @PathVariable @Min(1) Long id
+            @PathVariable @Valid @Min(1) Long id
     ) {
         return bookService.findById(id);
     }
@@ -89,7 +90,7 @@ public class BookStoreController {
                     + "This operation requires the user to have the role ADMIN."
     )
     public BookDto updateBookById(
-            @RequestBody CreateBookRequestDto requestDto,
+            @RequestBody UpdateBookRequestDto requestDto,
             @PathVariable @Min(1) Long id
     ) {
         return bookService.updateById(requestDto, id);

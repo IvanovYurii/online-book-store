@@ -1,4 +1,8 @@
 package ivanov.springbootintro.dto.category;
 
-public record CreateCategoryRequestDto(String name, String description) {
+import jakarta.validation.constraints.NotEmpty;
+
+public record CreateCategoryRequestDto(
+        @NotEmpty String name,
+        String description) {
 }

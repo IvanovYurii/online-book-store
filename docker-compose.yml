@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
   db:
-    image: mysql
+    image: mysql:8.0.36
     container_name: mysqldb
     restart: unless-stopped
     env_file: ./.env
@@ -12,6 +12,7 @@ services:
       MYSQL_ROOT_PASSWORD : $MYSQLDB_ROOT_PASSWORD
     ports:
       - "$MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT"
+    command: --innodb-redo-log-capacity=10485760
   app:
     depends_on:
       - db
@@ -30,4 +31,4 @@ services:
         "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQLDialect",
         "spring.jpa.hibernate.ddl-auto" : "validate"
       }'
-      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"

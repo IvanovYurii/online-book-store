@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import ivanov.springbootintro.dto.book.BookDtoWithoutCategoryIds;
 import ivanov.springbootintro.dto.category.CategoryDto;
 import ivanov.springbootintro.dto.category.CreateCategoryRequestDto;
+import ivanov.springbootintro.service.BookService;
 import ivanov.springbootintro.service.CategoryService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -34,6 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/api/categories")
 public class CategoryController {
+    private final BookService bookService;
     private final CategoryService categoryService;
 
     @GetMapping
@@ -77,7 +79,7 @@ public class CategoryController {
             @PathVariable @Min(1) Long id,
             @ParameterObject Pageable pageable
     ) {
-        return categoryService.getBooksByCategoryId(id, pageable);
+        return bookService.getBooksByCategoryId(id, pageable);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -85,7 +87,7 @@ public class CategoryController {
     @Operation(
             summary = "Create a new category",
             description = "This endpoint create a new category with the provided information,  "
-                    + "including name, and description. "
+                    + "including name and description. "
                     + "This operation requires the user to have the role ADMIN."
     )
     public CategoryDto createCategory(

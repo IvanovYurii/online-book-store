@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-orderItems-data
+      author: Ivanov Yurii
+      changes:
+        - insert:
+            tableName: order_items
+            columns:
+              - column: {name: order_id, value: '1'}
+              - column: {name: book_id, value: '1'}
+              - column: {name: quantity, value: '1'}
+              - column: {name: price, value: '12.99'}
+        - insert:
+            tableName: order_items
+            columns:
+              - column: { name: order_id, value: '1' }
+              - column: { name: book_id, value: '6' }
+              - column: { name: quantity, value: '1' }
+              - column: { name: price, value: '18.99' }

@@ -29,3 +29,12 @@ databaseChangeLog:
               - column: {name: first_name, value: 'Bob'}
               - column: {name: last_name, value: 'Jones'}
               - column: {name: shipping_address, value: '789 Pine St'}
+
+        - insert:
+            tableName: users
+            columns:
+              - column: { name: email, value: 'jack.jones@example.com' }
+              - column: { name: password, value: 'password_jack' }
+              - column: { name: first_name, value: 'Jack' }
+              - column: { name: last_name, value: 'Jackson' }
+              - column: { name: shipping_address, value: 'Space St 25' }

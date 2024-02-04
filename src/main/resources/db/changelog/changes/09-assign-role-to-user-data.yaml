@@ -18,3 +18,8 @@ databaseChangeLog:
             columns:
               - column: { name: user_id, value: '3' }
               - column: { name: roles_id, value: '2' }
+        - insert:
+            tableName: users_roles
+            columns:
+              - column: { name: user_id, value: '4' }
+              - column: { name: roles_id, value: '1' }

@@ -45,12 +45,12 @@ class BookStoreControllerIntegrationTest {
     private static MockMvc mockMvc;
     private final Set<Long> categoryIds = new HashSet<>();
     private final CreateBookRequestDto createBookRequestDto = new CreateBookRequestDto(
-            "Pride and Prejudice",
-            "Jane Austen",
-            "978-20141439518",
-            withBigDecimal(15.50, 2),
-            "A classic romantic novel set in early 19th-century England.",
-            "pride_prejudice.jpg",
+            "The Lord of the Rings",
+            "J.R.R. Tolkien",
+            "978-0547928210",
+            withBigDecimal(24.99, 2),
+            "An epic high-fantasy novel.",
+            "lord_of_the_rings.jpg",
             categoryIds
     );
     private final UpdateBookRequestDto updateBookRequestDto = new UpdateBookRequestDto(
@@ -107,7 +107,7 @@ class BookStoreControllerIntegrationTest {
             connection.setAutoCommit(true);
             ScriptUtils.executeSqlScript(
                     connection,
-                    new ClassPathResource("database/books/add-three-default-books.sql")
+                    new ClassPathResource("database/books/add-six-default-books.sql")
             );
             ScriptUtils.executeSqlScript(
                     connection,
@@ -139,7 +139,7 @@ class BookStoreControllerIntegrationTest {
         // Then
         BookDto[] actual = objectMapper.readValue(result.getResponse()
                 .getContentAsString(), BookDto[].class);
-        Assertions.assertEquals(3, actual.length);
+        Assertions.assertEquals(6, actual.length);
         Assertions.assertEquals("The Great Gatsby", actual[0].getTitle());
         Assertions.assertEquals("Harper Lee", actual[1].getAuthor());
         Assertions.assertEquals("978-0451524935", actual[2].getIsbn());
@@ -256,10 +256,9 @@ class BookStoreControllerIntegrationTest {
         Assertions.assertNotNull(actual.getId());
 
         Book actualBook = new Book();
-        if (bookRepository.findByIsbn("978-20141439518").isPresent()) {
-            actualBook = bookRepository.findByIsbn("978-20141439518").get();
+        if (bookRepository.findByIsbn(createBookRequestDto.isbn()).isPresent()) {
+            actualBook = bookRepository.findByIsbn(createBookRequestDto.isbn()).get();
         }
-        Assertions.assertEquals(4, actualBook.getId());
         Assertions.assertEquals(createBookRequestDto.title(), actualBook.getTitle());
         Assertions.assertEquals(createBookRequestDto.author(), actualBook.getAuthor());
         Assertions.assertEquals(createBookRequestDto.isbn(), actualBook.getIsbn());

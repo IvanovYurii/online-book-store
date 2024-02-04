@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-orders-data
+      author: Ivanov Yurii
+      changes:
+        - insert:
+            tableName: orders
+            columns:
+              - column: {name: user_id, value: '1'}
+              - column: {name: status, value: 'PENDING'}
+              - column: {name: total, value: '31.98'}
+              - column: {name: order_date, value: '2024-02-03 13:28:49'}
+              - column: {name: shipping_address, value: '123 Main St'}

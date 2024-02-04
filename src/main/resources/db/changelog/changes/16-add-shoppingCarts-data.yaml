@@ -15,3 +15,7 @@ databaseChangeLog:
             tableName: shopping_carts
             columns:
               - column: { name: user_id, value: '3' }
+        - insert:
+            tableName: shopping_carts
+            columns:
+              - column: { name: user_id, value: '4' }

@@ -131,7 +131,8 @@ class CategoryControllerIntegrationTest {
     @Test
     @Sql(
             scripts = {
-                    "classpath:database/books/add-three-default-books.sql",
+                    "classpath:database/books/remove-all-books.sql",
+                    "classpath:database/books/add-six-default-books.sql",
                     "classpath:database/categories/assign-category-to-book-data.sql"
             }, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
     )

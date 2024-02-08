@@ -14,14 +14,14 @@ import ivanov.springbootintro.dto.cartitem.CartItemDto;
 import ivanov.springbootintro.dto.cartitem.UpdateCartItemQuantityBookRequestDto;
 import ivanov.springbootintro.dto.shoppingcart.ShoppingCartDto;
 import ivanov.springbootintro.mapper.CartItemMapper;
+import ivanov.springbootintro.mapper.ShoppingCartMapper;
 import ivanov.springbootintro.model.CartItem;
 import ivanov.springbootintro.model.ShoppingCart;
+import ivanov.springbootintro.repository.cartitem.CartItemRepository;
 import ivanov.springbootintro.repository.shoppingcart.ShoppingCartRepository;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 import javax.sql.DataSource;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterAll;
@@ -41,6 +41,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.testcontainers.shaded.org.apache.commons.lang3.builder.EqualsBuilder;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ShoppingCartControllerIntegrationTest {
@@ -49,6 +50,10 @@ class ShoppingCartControllerIntegrationTest {
     private ObjectMapper objectMapper;
     @Autowired
     private ShoppingCartRepository shoppingCartRepository;
+    @Autowired
+    private ShoppingCartMapper shoppingCartMapper;
+    @Autowired
+    private CartItemRepository cartItemRepository;
     @Autowired
     private CartItemMapper cartItemMapper;
 
@@ -144,8 +149,9 @@ class ShoppingCartControllerIntegrationTest {
     public void getUserShoppingCart_WithExistingUser_ShouldReturnShoppingCartDto()
             throws Exception {
         // Given
-        ShoppingCart expectedShoppingCart = shoppingCartRepository
-                .getShoppingCartByUserEmail("bob.jones@example.com");
+        ShoppingCartDto expectedShoppingCart = shoppingCartMapper.toDto(shoppingCartRepository
+                .getShoppingCartByUserEmail("bob.jones@example.com"));
+        List<CartItemDto> expected = expectedShoppingCart.cartItems().stream().toList();
         // When
         MvcResult result = mockMvc.perform(
                         get("/api/cart")
@@ -158,16 +164,8 @@ class ShoppingCartControllerIntegrationTest {
                 .getContentAsString(), ShoppingCartDto.class);
         List<CartItemDto> actual = actualCard.cartItems().stream().toList();
         Assertions.assertNotNull(actual);
-        Assertions.assertEquals(expectedShoppingCart.getCartItems().size(), actual.size());
-        //Чи потрібно весь список порівнювати і як? Достатньо порівняти кількість у списках?
-        // Достатньо відфільтпувати одну книгу і хардкордом звірити поля?
-        Optional<CartItemDto> matchingItem = actual.stream()
-                .filter(item -> "The Great Gatsby".equals(item.bookTitle()))
-                .findFirst();
-        Assertions.assertTrue(matchingItem.isPresent());
-        CartItemDto matchingCartItem = matchingItem.get();
-        Assertions.assertEquals("The Great Gatsby", matchingCartItem.bookTitle());
-        Assertions.assertEquals(3, matchingCartItem.quantity());
+        Assertions.assertEquals(expectedShoppingCart.cartItems().size(), actual.size());
+        Assertions.assertTrue(expected.containsAll(actual));
     }
 
     @Test
@@ -186,15 +184,15 @@ class ShoppingCartControllerIntegrationTest {
                 .andReturn();
     }
 
-    // Add Item To Shopping Cart
+    // Add Book To Shopping Cart
     @Test
     @WithUserDetails("bob.jones@example.com")
     @DisplayName("""
             When method addItemToShoppingCart is called by authorised existing user,
-            Item is present in data base and not present in shopping cart
+            Book is present in data base and not present in shopping cart
             Then the corresponding ShoppingCartDto should be returned.
             """)
-    public void addItemToShoppingCart_WithItemNotPresentInShoppCart_ShouldReturnShoppingCartDto()
+    public void addItemToShoppingCart_WithBookNotPresentInShoppCart_ShouldReturnShoppingCartDto()
             throws Exception {
         // Given
         AddCartItemRequestDto addCartItemRequestDto =
@@ -220,7 +218,7 @@ class ShoppingCartControllerIntegrationTest {
     @WithUserDetails("bob.jones@example.com")
     @DisplayName("""
             When method addItemToShoppingCart is called by authorised existing user,
-            Item is present in data base and present in shopping cart
+            Book is present in data base and present in shopping cart
             Then the corresponding ShoppingCartDto should be returned with update quantity.
             """)
     public void addItemToShoppingCart_WithItemPresentInShoppingCart_ShouldReturnShoppingCartDto()
@@ -231,14 +229,9 @@ class ShoppingCartControllerIntegrationTest {
         String jsonRequest = objectMapper.writeValueAsString(addCartItemRequestDto);
         ShoppingCart exceptedCard = shoppingCartRepository
                 .getShoppingCartByUserEmail("bob.jones@example.com");
-        List<CartItem> actualItems = exceptedCard.getCartItems().stream().toList();
-        Optional<CartItem> expectedCartItem = actualItems.stream()
-                .filter(item -> addCartItemRequestDto.bookId().equals(item.getBook().getId()))
-                .findFirst();
-        CartItemDto expectedDto = expectedCartItem
-                .map(cartItemMapper::toDto)
-                .orElse(null);
-        assert expectedDto != null;
+        CartItemDto expected = cartItemMapper.toDto(cartItemRepository
+                .getCartItemByBookIdAndShoppingCartId(addCartItemRequestDto
+                        .bookId(), exceptedCard.getId()).orElseThrow());
         // When
         MvcResult result = mockMvc.perform(
                         post("/api/cart")
@@ -251,9 +244,8 @@ class ShoppingCartControllerIntegrationTest {
         CartItemDto actual = objectMapper.readValue(result.getResponse()
                 .getContentAsString(), CartItemDto.class);
         Assertions.assertNotNull(actual);
-        Assertions.assertEquals(expectedDto.bookId(), actual.bookId());
-        Assertions.assertEquals(expectedDto.bookTitle(), actual.bookTitle());
-        Assertions.assertEquals(expectedDto.quantity() + addCartItemRequestDto.quantity(),
+        Assertions.assertTrue(EqualsBuilder.reflectionEquals(expected, actual, "quantity"));
+        Assertions.assertEquals(expected.quantity() + addCartItemRequestDto.quantity(),
                 actual.quantity());
     }
 
@@ -280,7 +272,6 @@ class ShoppingCartControllerIntegrationTest {
                 .andReturn();
         // Then
         String actual = result.getResponse().getContentAsString();
-        System.out.println(actual);
         Assertions.assertEquals("Can't find book by id=" + addCartItemRequestDto.bookId(),
                 actual);
     }
@@ -293,15 +284,12 @@ class ShoppingCartControllerIntegrationTest {
     public void addItemToShoppingCart_WithNonAuthorisedUser_ShouldReturnStatusForbidden()
             throws Exception {
         // When
-        MvcResult result = mockMvc.perform(
+        mockMvc.perform(
                         post("/api/cart")
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(status().isForbidden())
                 .andReturn();
-
-        String actual = result.getResponse().getContentAsString();
-        System.out.println(actual);
     }
 
     // Update Cart Item Quantity
@@ -316,18 +304,13 @@ class ShoppingCartControllerIntegrationTest {
             throws Exception {
         // Given
         Long cartItemId = 4L;
-        ShoppingCart expectedCart = shoppingCartRepository
-                .getShoppingCartByUserEmail("bob.jones@example.com");
-        List<CartItem> actualItems = expectedCart.getCartItems().stream().toList();
-        Optional<CartItem> expectedOptional = actualItems.stream()
-                .filter(item -> cartItemId.equals(item.getId()))
-                .findFirst();
-        CartItemDto expectedDto = expectedOptional
-                .map(cartItemMapper::toDto)
-                .orElse(null);
-        assert expectedDto != null;
         UpdateCartItemQuantityBookRequestDto updateCartItemQuantity =
                 new UpdateCartItemQuantityBookRequestDto(5);
+        ShoppingCart exceptedCard = shoppingCartRepository
+                .getShoppingCartByUserEmail("bob.jones@example.com");
+        CartItemDto expected = cartItemMapper.toDto(cartItemRepository
+                .getCartItemByIdAndShoppingCartId(cartItemId,
+                        exceptedCard.getId()).orElseThrow());
         String jsonRequest = objectMapper.writeValueAsString(updateCartItemQuantity);
         // When
         MvcResult result = mockMvc.perform(
@@ -341,8 +324,7 @@ class ShoppingCartControllerIntegrationTest {
         CartItemDto actual = objectMapper.readValue(result.getResponse()
                 .getContentAsString(), CartItemDto.class);
         Assertions.assertNotNull(actual);
-        Assertions.assertEquals(expectedDto.bookId(), actual.bookId());
-        Assertions.assertEquals(expectedDto.bookTitle(), actual.bookTitle());
+        Assertions.assertTrue(EqualsBuilder.reflectionEquals(expected, actual, "quantity"));
         Assertions.assertEquals(updateCartItemQuantity.quantity(), actual.quantity());
     }
 
@@ -370,7 +352,6 @@ class ShoppingCartControllerIntegrationTest {
                 .andReturn();
         // Then
         String actual = result.getResponse().getContentAsString();
-        System.out.println(actual);
         Assertions.assertEquals("Can't update Shopping Cart: CartItem with ID "
                 + cartItemId + " not found.", actual);
     }
@@ -395,7 +376,6 @@ class ShoppingCartControllerIntegrationTest {
                 .andReturn();
         // Then
         String actual = result.getResponse().getContentAsString();
-        System.out.println(actual);
         assertTrue(actual.contains("Failed to read request"));
     }
 
@@ -409,14 +389,12 @@ class ShoppingCartControllerIntegrationTest {
         // Given
         Long cartItemId = 1L;
         // When
-        MvcResult result = mockMvc.perform(
+        mockMvc.perform(
                         put("/api/cart/cart-items/{cartItemId}", cartItemId)
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(status().isForbidden())
                 .andReturn();
-        String actual = result.getResponse().getContentAsString();
-        System.out.println(actual);
     }
 
     // Delete Book From Shopping Cart
@@ -431,6 +409,8 @@ class ShoppingCartControllerIntegrationTest {
             throws Exception {
         // Given
         Long cartItemId = 4L;
+        ShoppingCart expectedCard = shoppingCartRepository
+                .getShoppingCartByUserEmail("bob.jones@example.com");
         // When
         mockMvc.perform(
                         delete("/api/cart/cart-items/{cartItemId}", cartItemId)
@@ -440,9 +420,10 @@ class ShoppingCartControllerIntegrationTest {
         // Then
         ShoppingCart actualCard = shoppingCartRepository
                 .getShoppingCartByUserEmail("bob.jones@example.com");
-        System.out.println(actualCard.getCartItems().size());
-        Set<CartItem> actualItems = actualCard.getCartItems();
-        System.out.println(actualItems);
+        Assertions.assertEquals(expectedCard.getCartItems().size() - 1,
+                actualCard.getCartItems().size());
+        CartItem deletedCartItem = cartItemRepository.findById(cartItemId).orElse(null);
+        Assertions.assertNull(deletedCartItem);
     }
 
     @Test
@@ -464,7 +445,6 @@ class ShoppingCartControllerIntegrationTest {
                 .andReturn();
         // Then
         String actual = result.getResponse().getContentAsString();
-        System.out.println(actual);
         Assertions.assertEquals("Can't delete Shopping Cart: CartItem with ID "
                 + cartItemId + " not found.", actual);
     }

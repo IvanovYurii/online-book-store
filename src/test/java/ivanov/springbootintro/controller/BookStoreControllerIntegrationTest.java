@@ -7,21 +7,22 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ivanov.springbootintro.dto.book.BookDto;
 import ivanov.springbootintro.dto.book.BookSearchParameters;
 import ivanov.springbootintro.dto.book.CreateBookRequestDto;
 import ivanov.springbootintro.dto.book.UpdateBookRequestDto;
+import ivanov.springbootintro.mapper.BookMapper;
 import ivanov.springbootintro.model.Book;
-import ivanov.springbootintro.model.Category;
 import ivanov.springbootintro.repository.book.BookRepository;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import javax.sql.DataSource;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterEach;
@@ -39,6 +40,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.testcontainers.shaded.org.apache.commons.lang3.builder.EqualsBuilder;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class BookStoreControllerIntegrationTest {
@@ -66,6 +68,8 @@ class BookStoreControllerIntegrationTest {
     private ObjectMapper objectMapper;
     @Autowired
     private BookRepository bookRepository;
+    @Autowired
+    private BookMapper bookMapper;
 
     @SneakyThrows
     static void teardown(DataSource dataSource) {
@@ -129,6 +133,10 @@ class BookStoreControllerIntegrationTest {
             Then the corresponding list of BookDto should be returned.
             """)
     public void findAllBooks_WithAuthorisedUser_ShouldReturnListBookDto() throws Exception {
+        // Given
+        List<BookDto> expected = bookRepository.findAll().stream()
+                .map(bookMapper::toDto)
+                .toList();
         // When
         MvcResult result = mockMvc.perform(
                         get("/api/books")
@@ -137,12 +145,10 @@ class BookStoreControllerIntegrationTest {
                 .andExpect(status().isOk())
                 .andReturn();
         // Then
-        BookDto[] actual = objectMapper.readValue(result.getResponse()
-                .getContentAsString(), BookDto[].class);
-        Assertions.assertEquals(6, actual.length);
-        Assertions.assertEquals("The Great Gatsby", actual[0].getTitle());
-        Assertions.assertEquals("Harper Lee", actual[1].getAuthor());
-        Assertions.assertEquals("978-0451524935", actual[2].getIsbn());
+        List<BookDto> actual = objectMapper.readValue(result.getResponse()
+                .getContentAsString(), new TypeReference<>() {});
+        Assertions.assertEquals(expected.size(), actual.size());
+        Assertions.assertTrue(expected.containsAll(actual));
     }
 
     @Test
@@ -170,6 +176,7 @@ class BookStoreControllerIntegrationTest {
     public void findBookById_WithValidBookId_ShouldReturnBookDto() throws Exception {
         // Given
         Long id = 1L;
+        BookDto expected = bookMapper.toDto(bookRepository.findById(id).orElseThrow());
         // When
         MvcResult result = mockMvc.perform(
                         get("/api/books/{id}", id)
@@ -181,14 +188,7 @@ class BookStoreControllerIntegrationTest {
         BookDto actual = objectMapper.readValue(result.getResponse()
                 .getContentAsString(), BookDto.class);
         Assertions.assertNotNull(actual);
-        Assertions.assertEquals(id, actual.getId());
-        Assertions.assertEquals("The Great Gatsby", actual.getTitle());
-        Assertions.assertEquals("F. Scott Fitzgerald", actual.getAuthor());
-        Assertions.assertEquals("978-0743273565", actual.getIsbn());
-        Assertions.assertEquals(BigDecimal.valueOf(12.99), actual.getPrice());
-        Assertions.assertEquals("A classic novel about the American Dream.",
-                actual.getDescription());
-        Assertions.assertEquals("gatsby.jpg", actual.getCoverImage());
+        Assertions.assertTrue(EqualsBuilder.reflectionEquals(expected, actual));
     }
 
     @Test
@@ -216,7 +216,7 @@ class BookStoreControllerIntegrationTest {
             """)
     public void findBookById_WithInvalidBookId_ShouldReturnStatusNotFound() throws Exception {
         // Given
-        Long id = -5L;
+        Long id = 999L;
         // When
         MvcResult result = mockMvc.perform(
                         get("/api/books/{id}", id)
@@ -240,6 +240,7 @@ class BookStoreControllerIntegrationTest {
     public void createBook_WithValidRequestDto_ShouldReturnValidBookDto() throws Exception {
         // Given
         categoryIds.add(2L);
+        BookDto expected = bookMapper.toDto(bookMapper.toEntity(createBookRequestDto));
         String jsonRequest = objectMapper.writeValueAsString(createBookRequestDto);
         // When
         MvcResult result = mockMvc.perform(
@@ -254,21 +255,8 @@ class BookStoreControllerIntegrationTest {
                 BookDto.class);
         Assertions.assertNotNull(actual);
         Assertions.assertNotNull(actual.getId());
-
-        Book actualBook = new Book();
-        if (bookRepository.findByIsbn(createBookRequestDto.isbn()).isPresent()) {
-            actualBook = bookRepository.findByIsbn(createBookRequestDto.isbn()).get();
-        }
-        Assertions.assertEquals(createBookRequestDto.title(), actualBook.getTitle());
-        Assertions.assertEquals(createBookRequestDto.author(), actualBook.getAuthor());
-        Assertions.assertEquals(createBookRequestDto.isbn(), actualBook.getIsbn());
-        Assertions.assertEquals(createBookRequestDto.price(), actualBook.getPrice());
-        Assertions.assertEquals(createBookRequestDto.description(), actualBook.getDescription());
-        Assertions.assertEquals(createBookRequestDto.coverImage(), actualBook.getCoverImage());
-        Set<Long> categoriesId = actualBook.getCategories().stream()
-                .map(Category::getId)
-                .collect(Collectors.toSet());
-        Assertions.assertEquals(createBookRequestDto.categoryIds(), categoriesId);
+        Assertions.assertTrue(EqualsBuilder.reflectionEquals(expected, actual,
+                "id"));
     }
 
     @WithMockUser(username = "admin")
@@ -406,23 +394,12 @@ class BookStoreControllerIntegrationTest {
         BookDto actual = objectMapper.readValue(result.getResponse().getContentAsString(),
                 BookDto.class);
         Assertions.assertNotNull(actual);
-        Assertions.assertNotNull(actual.getId());
-
-        Book actualBook = new Book();
+        BookDto updatedBook = new BookDto();
         if (bookRepository.findByIsbn(updateBookRequestDto.isbn()).isPresent()) {
-            actualBook = bookRepository.findByIsbn(updateBookRequestDto.isbn()).get();
+            updatedBook = bookMapper.toDto(bookRepository
+                    .findByIsbn(updateBookRequestDto.isbn()).get());
         }
-        Assertions.assertEquals(1L, actualBook.getId());
-        Assertions.assertEquals(updateBookRequestDto.title(), actualBook.getTitle());
-        Assertions.assertEquals(updateBookRequestDto.author(), actualBook.getAuthor());
-        Assertions.assertEquals(updateBookRequestDto.isbn(), actualBook.getIsbn());
-        Assertions.assertEquals(updateBookRequestDto.price(), actualBook.getPrice());
-        Assertions.assertEquals(updateBookRequestDto.description(), actualBook.getDescription());
-        Assertions.assertEquals(updateBookRequestDto.coverImage(), actualBook.getCoverImage());
-        Set<Long> categoriesId = actualBook.getCategories().stream()
-                .map(Category::getId)
-                .collect(Collectors.toSet());
-        Assertions.assertEquals(updateBookRequestDto.categoryIds(), categoriesId);
+        Assertions.assertTrue(EqualsBuilder.reflectionEquals(updatedBook, actual));
     }
 
     @WithMockUser(username = "admin")
@@ -521,7 +498,7 @@ class BookStoreControllerIntegrationTest {
                 categoryIds
         );
         String jsonRequest = objectMapper.writeValueAsString(requestDto);
-        Long id = -5L;
+        Long id = 999L;
         // When
         MvcResult result = mockMvc.perform(
                         put("/api/books/{id}", id)
@@ -547,6 +524,7 @@ class BookStoreControllerIntegrationTest {
     public void deleteBookById_WithValidRequestDto_SShouldReturnStatusNoContent() throws Exception {
         // Given
         Long id = 1L;
+        List<Book> expected = bookRepository.findAll();
         // When
         mockMvc.perform(
                         delete("/api/books/{id}", id)
@@ -554,6 +532,11 @@ class BookStoreControllerIntegrationTest {
                 )
                 .andExpect(status().isNoContent())
                 .andReturn();
+        // Then
+        List<Book> actual = bookRepository.findAll();
+        Assertions.assertEquals(expected.size() - 1, actual.size());
+        Book deletedBook = bookRepository.findById(id).orElse(null);
+        Assertions.assertNull(deletedBook);
     }
 
     @WithMockUser(username = "admin")
@@ -603,7 +586,7 @@ class BookStoreControllerIntegrationTest {
             """)
     public void deleteBookById_WithInvalidBookId_ShouldReturnStatusNotFound() throws Exception {
         // Given
-        Long id = -5L;
+        Long id = 999L;
         // When
         MvcResult result = mockMvc.perform(
                         delete("/api/books/{id}", id)

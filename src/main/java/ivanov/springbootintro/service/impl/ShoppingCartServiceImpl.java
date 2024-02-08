@@ -46,12 +46,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                         + requestDto.bookId()));
         ShoppingCart shoppingCart = shoppingCartRepository
                 .getShoppingCartByUserEmail(user.getEmail());
-        Optional<CartItem> cartItemWithPresentBook = cartItemRepository
+        Optional<CartItem> cartItemWithBookPresent = cartItemRepository
                 .getCartItemByBookIdAndShoppingCartId(requestDto.bookId(), shoppingCart.getId());
         CartItem cartItem;
-        if (cartItemWithPresentBook.isPresent()) {
-            cartItem = cartItemWithPresentBook.get();
-            cartItem.setQuantity(cartItemWithPresentBook.get().getQuantity()
+        if (cartItemWithBookPresent.isPresent()) {
+            cartItem = cartItemWithBookPresent.get();
+            cartItem.setQuantity(cartItemWithBookPresent.get().getQuantity()
                     + requestDto.quantity());
         } else {
             cartItem = cartItemMapper.toEntity(requestDto);
@@ -67,25 +67,23 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             User user,
             Long cartItemId,
             UpdateCartItemQuantityBookRequestDto updateDto) {
-        CartItem cartItem = findCartItemInShoppingCart(user.getEmail(), cartItemId, "update");
+        CartItem cartItem = findCartItemInShoppingCart(user.getEmail(), cartItemId);
         cartItem.setQuantity(updateDto.quantity());
-        cartItemRepository.save(cartItem);
-        return cartItemMapper.toDto(cartItem);
+        return cartItemMapper.toDto(cartItemRepository.save(cartItem));
     }
 
     @Override
     public void deleteBookFromShoppingCart(User user, Long cartItemId) {
-        CartItem cartItem = findCartItemInShoppingCart(user.getEmail(), cartItemId, "delete");
-        cartItemRepository.delete(cartItem);
+        cartItemRepository.deleteCartItemIfExistsFromUserShoppingCart(cartItemId, user.getId());
     }
 
     private CartItem findCartItemInShoppingCart(
-            String userEmail, Long cartItemId, String operationName) {
+            String userEmail, Long cartItemId) {
         ShoppingCart shoppingCart = shoppingCartRepository
                 .getShoppingCartByUserEmail(userEmail);
         return cartItemRepository
                 .getCartItemByIdAndShoppingCartId(cartItemId, shoppingCart.getId())
-                .orElseThrow(() -> new EntityNotFoundException("Can't " + operationName
-                        + " Shopping Cart: CartItem with ID " + cartItemId + " not found."));
+                .orElseThrow(() -> new EntityNotFoundException("Can't update Shopping Cart: "
+                        + "CartItem with ID " + cartItemId + " not found."));
     }
 }

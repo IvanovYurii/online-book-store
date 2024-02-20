@@ -7,14 +7,19 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ivanov.springbootintro.dto.book.BookDtoWithoutCategoryIds;
 import ivanov.springbootintro.dto.category.CategoryDto;
 import ivanov.springbootintro.dto.category.CreateCategoryRequestDto;
+import ivanov.springbootintro.mapper.BookMapper;
+import ivanov.springbootintro.mapper.CategoryMapper;
 import ivanov.springbootintro.model.Category;
+import ivanov.springbootintro.repository.book.BookRepository;
 import ivanov.springbootintro.repository.category.CategoryRepository;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 import javax.sql.DataSource;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterEach;
@@ -33,6 +38,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.testcontainers.shaded.org.apache.commons.lang3.builder.EqualsBuilder;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CategoryControllerIntegrationTest {
@@ -44,9 +50,14 @@ class CategoryControllerIntegrationTest {
 
     @Autowired
     private ObjectMapper objectMapper;
-
+    @Autowired
+    private BookRepository bookRepository;
+    @Autowired
+    private BookMapper bookMapper;
     @Autowired
     private CategoryRepository categoryRepository;
+    @Autowired
+    private CategoryMapper categoryMapper;
 
     @SneakyThrows
     static void teardown(DataSource dataSource) {
@@ -92,6 +103,10 @@ class CategoryControllerIntegrationTest {
             """)
     public void getAllCategories_WithAuthorisedUser_ShouldReturnListCategoryDto()
             throws Exception {
+        // Given
+        List<CategoryDto> expected = categoryRepository.findAll().stream()
+                .map(categoryMapper::toDto)
+                .toList();
         // When
         MvcResult result = mockMvc.perform(
                         get("/api/categories")
@@ -100,14 +115,12 @@ class CategoryControllerIntegrationTest {
                 .andExpect(status().isOk())
                 .andReturn();
         // Then
-        CategoryDto[] actual = objectMapper.readValue(result.getResponse()
-                .getContentAsString(), CategoryDto[].class);
+        List<CategoryDto> actual = objectMapper.readValue(result.getResponse()
+                .getContentAsString(), new TypeReference<>() {
+                });
         Assertions.assertNotNull(actual);
-        Assertions.assertEquals(4, actual.length);
-        Assertions.assertEquals(1L, actual[0].id());
-        Assertions.assertEquals("Fantasy", actual[1].name());
-        Assertions.assertEquals("Detectives books", actual[2].description());
-        Assertions.assertEquals("Historical", actual[3].name());
+        Assertions.assertEquals(expected.size(), actual.size());
+        Assertions.assertTrue(expected.containsAll(actual));
     }
 
     @Test
@@ -131,7 +144,8 @@ class CategoryControllerIntegrationTest {
     @Test
     @Sql(
             scripts = {
-                    "classpath:database/books/add-three-default-books.sql",
+                    "classpath:database/books/remove-all-books.sql",
+                    "classpath:database/books/add-six-default-books.sql",
                     "classpath:database/categories/assign-category-to-book-data.sql"
             }, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
     )
@@ -150,6 +164,9 @@ class CategoryControllerIntegrationTest {
             throws Exception {
         // Given
         Long id = 1L;
+        List<BookDtoWithoutCategoryIds> expected = bookRepository.findAllByCategoriesId(id).stream()
+                .map(bookMapper::toDtoWithoutCategories)
+                .toList();
         // When
         MvcResult result = mockMvc.perform(
                         get("/api/categories/{id}/books", id)
@@ -158,12 +175,12 @@ class CategoryControllerIntegrationTest {
                 .andExpect(status().isOk())
                 .andReturn();
         // Then
-        BookDtoWithoutCategoryIds[] actual = objectMapper.readValue(result.getResponse()
-                .getContentAsString(), BookDtoWithoutCategoryIds[].class);
+        List<BookDtoWithoutCategoryIds> actual = objectMapper.readValue(result.getResponse()
+                .getContentAsString(), new TypeReference<>() {
+                });
         Assertions.assertNotNull(actual);
-        Assertions.assertEquals(2, actual.length);
-        Assertions.assertEquals("The Great Gatsby", actual[0].title());
-        Assertions.assertEquals("1984", actual[1].title());
+        Assertions.assertEquals(expected.size(), actual.size());
+        Assertions.assertTrue(expected.containsAll(actual));
     }
 
     @WithMockUser(username = "admin")
@@ -218,7 +235,7 @@ class CategoryControllerIntegrationTest {
     public void getBooksByCategoryId_WithInvalidCategoryId_ShouldReturnEmptyList()
             throws Exception {
         // Given
-        Long id = -5L;
+        Long id = 999L;
         // When
         MvcResult result = mockMvc.perform(
                         get("/api/categories/{id}/books", id)
@@ -244,6 +261,7 @@ class CategoryControllerIntegrationTest {
             throws Exception {
         // Given
         Long id = 1L;
+        CategoryDto expected = categoryMapper.toDto(categoryRepository.findById(id).orElseThrow());
         // When
         MvcResult result = mockMvc.perform(
                         get("/api/categories/{id}", id)
@@ -255,9 +273,7 @@ class CategoryControllerIntegrationTest {
         CategoryDto actual = objectMapper.readValue(result.getResponse()
                 .getContentAsString(), CategoryDto.class);
         Assertions.assertNotNull(actual);
-        Assertions.assertEquals(id, actual.id());
-        Assertions.assertEquals("Fiction", actual.name());
-        Assertions.assertEquals("Fiction books", actual.description());
+        Assertions.assertTrue(EqualsBuilder.reflectionEquals(expected, actual));
     }
 
     @Test
@@ -287,7 +303,7 @@ class CategoryControllerIntegrationTest {
     public void getCategoryById_WithInvalidCategoryId_ShouldReturnStatusNotFound()
             throws Exception {
         // Given
-        Long id = -5L;
+        Long id = 999L;
         // When
         MvcResult result = mockMvc.perform(
                         get("/api/categories/{id}", id)
@@ -312,6 +328,8 @@ class CategoryControllerIntegrationTest {
             throws Exception {
         // Given
         String jsonRequest = objectMapper.writeValueAsString(createCategoryRequestDto);
+        CategoryDto expected = categoryMapper.toDto(categoryMapper
+                .toEntity(createCategoryRequestDto));
         // When
         MvcResult result = mockMvc.perform(
                         post("/api/categories")
@@ -321,15 +339,11 @@ class CategoryControllerIntegrationTest {
                 .andExpect(status().isOk())
                 .andReturn();
         // Then
-        Category actualResponse = objectMapper.readValue(result.getResponse()
-                .getContentAsString(), Category.class);
-        Assertions.assertNotNull(actualResponse);
-        Category actual = new Category();
-        if (categoryRepository.findById(actualResponse.getId()).isPresent()) {
-            actual = categoryRepository.findById(actualResponse.getId()).get();
-        }
-        Assertions.assertEquals(createCategoryRequestDto.name(), actual.getName());
-        Assertions.assertEquals(createCategoryRequestDto.description(), actual.getDescription());
+        CategoryDto actual = objectMapper.readValue(result.getResponse()
+                .getContentAsString(), CategoryDto.class);
+        Assertions.assertNotNull(actual);
+        Assertions.assertTrue(EqualsBuilder.reflectionEquals(expected, actual,
+                "id"));
     }
 
     @WithMockUser(username = "admin")
@@ -416,15 +430,12 @@ class CategoryControllerIntegrationTest {
                 .andExpect(status().isOk())
                 .andReturn();
         // Then
-        Category actualResponse = objectMapper.readValue(result.getResponse()
-                .getContentAsString(), Category.class);
-        Assertions.assertNotNull(actualResponse);
-        Category actual = new Category();
-        if (categoryRepository.findById(actualResponse.getId()).isPresent()) {
-            actual = categoryRepository.findById(actualResponse.getId()).get();
-        }
-        Assertions.assertEquals(createCategoryRequestDto.name(), actual.getName());
-        Assertions.assertEquals(createCategoryRequestDto.description(), actual.getDescription());
+        CategoryDto actual = objectMapper.readValue(result.getResponse()
+                .getContentAsString(), CategoryDto.class);
+        Assertions.assertNotNull(actual);
+        CategoryDto updatedCategory = categoryMapper.toDto(categoryRepository
+                .findById(id).orElseThrow());
+        Assertions.assertTrue(EqualsBuilder.reflectionEquals(updatedCategory, actual));
     }
 
     @WithMockUser(username = "admin")
@@ -483,13 +494,16 @@ class CategoryControllerIntegrationTest {
         Long id = 1L;
         String jsonRequest = "";
         // When
-        mockMvc.perform(
+        MvcResult result = mockMvc.perform(
                         put("/api/categories/{id}", id)
                                 .content(jsonRequest)
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(status().isBadRequest())
                 .andReturn();
+        // Then
+        Assertions.assertTrue(result.getResponse().getContentAsString()
+                .contains("Failed to read request"));
     }
 
     @WithMockUser(username = "admin", roles = {"ADMIN"})
@@ -501,7 +515,7 @@ class CategoryControllerIntegrationTest {
     public void updateCategoryById_WithInvalidCategoryId_ShouldReturnStatusNotFound()
             throws Exception {
         // Given
-        Long id = -5L;
+        Long id = 999L;
         String jsonRequest = objectMapper.writeValueAsString(createCategoryRequestDto);
         // When
         MvcResult result = mockMvc.perform(
@@ -529,6 +543,7 @@ class CategoryControllerIntegrationTest {
             throws Exception {
         // Given
         Long id = 1L;
+        List<Category> expected = categoryRepository.findAll();
         // When
         mockMvc.perform(
                         delete("/api/categories/{id}", id)
@@ -536,6 +551,11 @@ class CategoryControllerIntegrationTest {
                 )
                 .andExpect(status().isNoContent())
                 .andReturn();
+        // Then
+        List<Category> actual = categoryRepository.findAll();
+        Assertions.assertEquals(expected.size() - 1, actual.size());
+        Category deletedCategory = categoryRepository.findById(id).orElse(null);
+        Assertions.assertNull(deletedCategory);
     }
 
     @WithMockUser(username = "admin")
@@ -586,7 +606,7 @@ class CategoryControllerIntegrationTest {
     public void deleteCategoryById_WithInvalidCategoryId_ShouldReturnStatusNotFound()
             throws Exception {
         // Given
-        Long id = -5L;
+        Long id = 999L;
         // When
         MvcResult result = mockMvc.perform(
                         delete("/api/categories/{id}", id)

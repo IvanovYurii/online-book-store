@@ -17,7 +17,7 @@ import ivanov.springbootintro.dto.book.CreateBookRequestDto;
 import ivanov.springbootintro.dto.book.UpdateBookRequestDto;
 import ivanov.springbootintro.exception.EntityAlreadyPresentException;
 import ivanov.springbootintro.exception.EntityNotFoundException;
-import ivanov.springbootintro.mapper.impl.BookMapperImpl;
+import ivanov.springbootintro.mapper.BookMapper;
 import ivanov.springbootintro.model.Book;
 import ivanov.springbootintro.model.Category;
 import ivanov.springbootintro.repository.book.BookRepository;
@@ -53,7 +53,7 @@ class BookServiceImplTest {
     private BookRepository bookRepository;
 
     @Mock
-    private BookMapperImpl bookMapper;
+    private BookMapper bookMapper;
 
     @Mock
     private CategoryRepository categoryRepository;
@@ -146,8 +146,7 @@ class BookServiceImplTest {
             When create is called,
             Then throw EntityAlreadyPresentException should be returned.
             """)
-    public void
-            createBook_WithNotUniqueIsbnInRequestDto_ShouldThrowEntityAlreadyPresentException() {
+    public void createBook_WithNotUniqueIsbnInRequest_ShouldThrowEntityAlreadyPresentException() {
         // Given
         when(bookRepository.findByIsbn(book.getIsbn()))
                 .thenReturn(Optional.of(book));
@@ -156,7 +155,7 @@ class BookServiceImplTest {
                 EntityAlreadyPresentException.class,
                 () -> bookService.create(createBookRequestDto)
         );
-        // Verify
+        // Then
         String expected = "Can't create a book. Book with Isbn " + book.getIsbn()
                 + " is already present";
         assertEquals(expected, actual.getMessage());
@@ -311,12 +310,12 @@ class BookServiceImplTest {
         book.setId(2L);
         when(bookRepository.findByIsbn(book.getIsbn())).thenReturn(Optional.of(book));
 
-        // When and Then
+        // When
         EntityAlreadyPresentException actual = assertThrows(
                 EntityAlreadyPresentException.class,
                 () -> bookService.updateById(updateBookRequestDto, 1L)
         );
-        // Verify
+        // Then
         String expected = "Book with ISBN " + updateBookRequestDto.isbn() + " is already present";
         assertEquals(expected, actual.getMessage());
         verify(bookRepository, times(1)).findById(1L);
@@ -343,7 +342,6 @@ class BookServiceImplTest {
                 "no  image",
                 categoryIds
         );
-
         book.setAuthor(requestDto.author());
         book.setPrice(
                 requestDto.price() != null
@@ -351,15 +349,12 @@ class BookServiceImplTest {
                         book.getPrice()
         );
         book.setDescription(requestDto.description());
-
         bookDto.setAuthor(book.getAuthor());
         bookDto.setPrice(book.getPrice());
         bookDto.setDescription(book.getDescription());
-
         when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
         when(bookRepository.save(book)).thenReturn(book);
         when(bookMapper.toDto(book)).thenReturn(bookDto);
-        //when(categoryRepository.findById(1L)).thenReturn(bookDto); мокати категорії по айді
         // When
         BookDto actualBook = bookService.updateById(requestDto, 1L);
         // Then
@@ -368,7 +363,6 @@ class BookServiceImplTest {
         verify(bookMapper, times(1)).toDto(book);
         verify(bookRepository, times(1)).save(book);
     }
-
 
     // DeleteById
     @Test

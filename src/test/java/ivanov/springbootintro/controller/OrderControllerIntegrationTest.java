@@ -167,6 +167,7 @@ class OrderControllerIntegrationTest {
             """)
     public void placeOrder_WithEmptyShoppingCart_ShouldReturnStatusNotFound()
             throws Exception {
+        // Given
         User user = userRepository.findByEmail("jack.jones@example.com").orElseThrow();
         PlaceOrderRequestDto placeOrderRequestDto = new PlaceOrderRequestDto(
                 user.getShippingAddress()

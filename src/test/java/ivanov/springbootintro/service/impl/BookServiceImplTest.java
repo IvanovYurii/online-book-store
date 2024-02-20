@@ -155,7 +155,7 @@ class BookServiceImplTest {
                 EntityAlreadyPresentException.class,
                 () -> bookService.create(createBookRequestDto)
         );
-        // Verify
+        // Then
         String expected = "Can't create a book. Book with Isbn " + book.getIsbn()
                 + " is already present";
         assertEquals(expected, actual.getMessage());
@@ -310,12 +310,12 @@ class BookServiceImplTest {
         book.setId(2L);
         when(bookRepository.findByIsbn(book.getIsbn())).thenReturn(Optional.of(book));
 
-        // When and Then
+        // When
         EntityAlreadyPresentException actual = assertThrows(
                 EntityAlreadyPresentException.class,
                 () -> bookService.updateById(updateBookRequestDto, 1L)
         );
-        // Verify
+        // Then
         String expected = "Book with ISBN " + updateBookRequestDto.isbn() + " is already present";
         assertEquals(expected, actual.getMessage());
         verify(bookRepository, times(1)).findById(1L);

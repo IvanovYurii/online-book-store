@@ -93,7 +93,6 @@ class AuthenticationControllerIntegrationTest {
                 .andReturn();
         // Then
         String actual = result.getResponse().getContentAsString();
-        System.out.println(actual);
         assertTrue(actual.contains("User login or password incorrect"));
     }
 
@@ -115,7 +114,6 @@ class AuthenticationControllerIntegrationTest {
                 .andReturn();
         // Then
         String actual = result.getResponse().getContentAsString();
-        System.out.println(actual);
         assertTrue(actual.contains("must not be empty"));
     }
 
@@ -126,7 +124,6 @@ class AuthenticationControllerIntegrationTest {
             """)
     public void loginUser_WithEmptyUserData_ShouldReturnBadRequestStatus() throws Exception {
         // Given
-
         String jsonRequest = objectMapper.writeValueAsString(new UserLoginRequestDto("", ""));
         // When
         MvcResult result = mockMvc.perform(
@@ -138,7 +135,6 @@ class AuthenticationControllerIntegrationTest {
                 .andReturn();
         // Then
         String actual = result.getResponse().getContentAsString();
-        System.out.println(actual);
         assertTrue(actual.contains("errors"));
     }
 
@@ -190,7 +186,6 @@ class AuthenticationControllerIntegrationTest {
                 .andReturn();
         // Then
         String actual = result.getResponse().getContentAsString();
-        System.out.println(actual);
         assertTrue(actual.contains("email must be a well-formed email address"));
     }
 
@@ -215,7 +210,6 @@ class AuthenticationControllerIntegrationTest {
                 .andReturn();
         // Then
         String actual = result.getResponse().getContentAsString();
-        System.out.println(actual);
         assertTrue(actual.contains("Password and repeat password must match"));
     }
 
@@ -242,7 +236,6 @@ class AuthenticationControllerIntegrationTest {
                 .andReturn();
         // Then
         String actual = result.getResponse().getContentAsString();
-        System.out.println(actual);
         assertTrue(actual.contains("length must be between 8 and 20"));
     }
 
@@ -268,8 +261,6 @@ class AuthenticationControllerIntegrationTest {
                 .andReturn();
         // Then
         String actual = result.getResponse().getContentAsString();
-        System.out.println(actual);
         assertTrue(actual.contains("must not be empty"));
     }
-
 }

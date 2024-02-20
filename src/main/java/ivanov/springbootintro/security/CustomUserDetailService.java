@@ -1,6 +1,6 @@
 package ivanov.springbootintro.security;
 
-import ivanov.springbootintro.exception.EntityNotFoundException;
+import ivanov.springbootintro.exception.InvalidLoginOrPasswordException;
 import ivanov.springbootintro.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +17,6 @@ public class CustomUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
         return userRepository.findByEmail(email).orElseThrow(
-                () -> new EntityNotFoundException("User login or password incorrect"));
+                () -> new InvalidLoginOrPasswordException("User login or password incorrect"));
     }
 }

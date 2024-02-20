@@ -15,8 +15,7 @@ import ivanov.springbootintro.repository.book.BookRepository;
 import ivanov.springbootintro.repository.cartitem.CartItemRepository;
 import ivanov.springbootintro.repository.shoppingcart.ShoppingCartRepository;
 import ivanov.springbootintro.service.ShoppingCartService;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -47,19 +46,15 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                         + requestDto.bookId()));
         ShoppingCart shoppingCart = shoppingCartRepository
                 .getShoppingCartByUserEmail(user.getEmail());
-        Set<Long> bookIds = shoppingCart.getCartItems().stream()
-                .map(cartItem -> cartItem.getBook().getId())
-                .collect(Collectors.toSet());
-        boolean containsBookId = bookIds.contains(requestDto.bookId());
-        CartItem cartItem = cartItemMapper.toEntity(requestDto);
-        if (containsBookId) {
-            CartItem existingCartItem = findCartItemInShoppingCart(
-                    shoppingCart, book.getId());
-            existingCartItem.setQuantity(existingCartItem.getQuantity()
+        Optional<CartItem> cartItemWithBookPresent = cartItemRepository
+                .getCartItemByBookIdAndShoppingCartId(requestDto.bookId(), shoppingCart.getId());
+        CartItem cartItem;
+        if (cartItemWithBookPresent.isPresent()) {
+            cartItem = cartItemWithBookPresent.get();
+            cartItem.setQuantity(cartItemWithBookPresent.get().getQuantity()
                     + requestDto.quantity());
-            cartItem = existingCartItem;
         } else {
-            cartItem.setQuantity(requestDto.quantity());
+            cartItem = cartItemMapper.toEntity(requestDto);
             cartItem.setShoppingCart(shoppingCart);
             cartItem.setBook(book);
         }
@@ -72,29 +67,23 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             User user,
             Long cartItemId,
             UpdateCartItemQuantityBookRequestDto updateDto) {
-        ShoppingCart shoppingCart = shoppingCartRepository
-                .getShoppingCartByUserEmail(user.getEmail());
-        CartItem cartItem = findCartItemInShoppingCart(shoppingCart, cartItemId);
+        CartItem cartItem = findCartItemInShoppingCart(user.getEmail(), cartItemId);
         cartItem.setQuantity(updateDto.quantity());
-        cartItemRepository.save(cartItem);
-        return cartItemMapper.toDto(cartItem);
+        return cartItemMapper.toDto(cartItemRepository.save(cartItem));
     }
 
     @Override
     public void deleteBookFromShoppingCart(User user, Long cartItemId) {
-        ShoppingCart shoppingCart = shoppingCartRepository
-                .getShoppingCartByUserEmail(user.getEmail());
-        CartItem cartItem = findCartItemInShoppingCart(shoppingCart, cartItemId);
-        cartItemRepository.delete(cartItem);
+        cartItemRepository.deleteCartItemIfExistsFromUserShoppingCart(cartItemId, user.getId());
     }
 
     private CartItem findCartItemInShoppingCart(
-            ShoppingCart shoppingCart, Long bookId) {
-        return shoppingCart.getCartItems()
-                .stream()
-                .filter(item -> item.getBook().getId().equals(bookId))
-                .findFirst()
-                .orElseThrow(() ->
-                        new EntityNotFoundException("CartItem not found for bookId: " + bookId));
+            String userEmail, Long cartItemId) {
+        ShoppingCart shoppingCart = shoppingCartRepository
+                .getShoppingCartByUserEmail(userEmail);
+        return cartItemRepository
+                .getCartItemByIdAndShoppingCartId(cartItemId, shoppingCart.getId())
+                .orElseThrow(() -> new EntityNotFoundException("Can't update Shopping Cart: "
+                        + "CartItem with ID " + cartItemId + " not found."));
     }
 }

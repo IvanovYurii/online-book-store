@@ -7,12 +7,18 @@ databaseChangeLog:
             tableName: books_categories
             columns:
               - column:
-                  name: book_id
-                  type: bigint
-                  constraints:
-                    nullable: false
-              - column:
                   name: categories_id
                   type: bigint
                   constraints:
+                    foreignKeyName: fk_books_categories_categories
+                    references: categories(id)
                     nullable: false
+                    deleteCascade: true
+              - column:
+                  name: book_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_books_categories_books
+                    references: books(id)
+                    nullable: false
+                    deleteCascade: true

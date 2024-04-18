@@ -63,16 +63,7 @@ class ShoppingCartControllerIntegrationTest {
             connection.setAutoCommit(true);
             ScriptUtils.executeSqlScript(
                     connection,
-                    new ClassPathResource("database/books/remove-all-books.sql")
-            );
-            ScriptUtils.executeSqlScript(
-                    connection,
-                    new ClassPathResource("database/categories/remove-all-categories.sql")
-            );
-            ScriptUtils.executeSqlScript(
-                    connection,
-                    new ClassPathResource("database/categories/remove-all-assign-"
-                            + "categories-to-book.sql")
+                    new ClassPathResource("database/remove-all-data.sql")
             );
         }
     }

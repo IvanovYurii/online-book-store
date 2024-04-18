@@ -22,7 +22,7 @@ import java.sql.SQLException;
 import java.util.List;
 import javax.sql.DataSource;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -65,7 +65,7 @@ class CategoryControllerIntegrationTest {
             connection.setAutoCommit(true);
             ScriptUtils.executeSqlScript(
                     connection,
-                    new ClassPathResource("database/categories/remove-all-categories.sql")
+                    new ClassPathResource("database/remove-all-data.sql")
             );
         }
     }
@@ -89,8 +89,8 @@ class CategoryControllerIntegrationTest {
         }
     }
 
-    @AfterEach
-    void afterEach(@Autowired DataSource dataSource) {
+    @AfterAll
+    static void afterAll(@Autowired DataSource dataSource) {
         teardown(dataSource);
     }
 
@@ -144,15 +144,15 @@ class CategoryControllerIntegrationTest {
     @Test
     @Sql(
             scripts = {
-                    "classpath:database/books/remove-all-books.sql",
+                    "classpath:database/remove-all-data.sql",
                     "classpath:database/books/add-six-default-books.sql",
+                    "classpath:database/categories/add-four-default-categories.sql",
                     "classpath:database/categories/assign-category-to-book-data.sql"
             }, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
     )
     @Sql(
             scripts = {
-                    "classpath:database/books/remove-all-books.sql",
-                    "classpath:database/categories/remove-all-assign-categories-to-book.sql"
+                    "classpath:database/remove-all-data.sql",
             }, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD
     )
     @DisplayName("""

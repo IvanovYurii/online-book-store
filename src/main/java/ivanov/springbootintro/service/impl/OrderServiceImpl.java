@@ -50,7 +50,6 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.orderToOrderDto(order);
     }
 
-    @Transactional
     @Override
     public List<OrderDto> getOrderHistory(Long userId, Pageable pageable) {
         return orderRepository.findByUserId(userId)
@@ -69,7 +68,6 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.orderToOrderDto(order);
     }
 
-    @Transactional
     @Override
     public List<OrderItemDto> getOrderItems(Long orderId, Pageable pageable) {
         Order order = getOrderFromDb(orderId);
@@ -78,7 +76,6 @@ public class OrderServiceImpl implements OrderService {
                 .toList();
     }
 
-    @Transactional
     @Override
     public OrderItemDto getOrderItem(Long orderId, Long itemId) {
         Order order = getOrderFromDb(orderId);

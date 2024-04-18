@@ -17,12 +17,18 @@ databaseChangeLog:
                   name: order_id
                   type: bigint
                   constraints:
+                    foreignKeyName: fk_order_items_order_id
+                    references: orders(id)
                     nullable: false
+                    deleteCascade: false
               - column:
                   name: book_id
                   type: bigint
                   constraints:
+                    foreignKeyName: fk_order_items_book_id
+                    references: books(id)
                     nullable: false
+                    deleteCascade: false
               - column:
                   name: quantity
                   type: integer

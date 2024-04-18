@@ -142,7 +142,7 @@ class AuthenticationControllerIntegrationTest {
     @Test
     @DisplayName("""
             When method registration is called with valid request data user,
-            Then the UserDto should be returned..
+            Then the UserDto should be returned.
             """)
     public void registrationUser_WithValidUserData_ShouldReturnUserDto() throws Exception {
         // Given

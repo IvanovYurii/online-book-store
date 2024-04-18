@@ -72,16 +72,7 @@ class OrderControllerIntegrationTest {
             connection.setAutoCommit(true);
             ScriptUtils.executeSqlScript(
                     connection,
-                    new ClassPathResource("database/books/remove-all-books.sql")
-            );
-            ScriptUtils.executeSqlScript(
-                    connection,
-                    new ClassPathResource("database/categories/remove-all-categories.sql")
-            );
-            ScriptUtils.executeSqlScript(
-                    connection,
-                    new ClassPathResource("database/categories/remove-all-assign-"
-                            + "categories-to-book.sql")
+                    new ClassPathResource("database/remove-all-data.sql")
             );
         }
     }
@@ -100,11 +91,11 @@ class OrderControllerIntegrationTest {
             connection.setAutoCommit(true);
             ScriptUtils.executeSqlScript(
                     connection,
-                    new ClassPathResource("database/books/add-six-default-books.sql")
+                    new ClassPathResource("database/categories/add-four-default-categories.sql")
             );
             ScriptUtils.executeSqlScript(
                     connection,
-                    new ClassPathResource("database/categories/add-four-default-categories.sql")
+                    new ClassPathResource("database/books/add-six-default-books.sql")
             );
             ScriptUtils.executeSqlScript(
                     connection,
@@ -113,6 +104,10 @@ class OrderControllerIntegrationTest {
             ScriptUtils.executeSqlScript(
                     connection,
                     new ClassPathResource("database/cart_items/add-default-cart-items.sql")
+            );
+            ScriptUtils.executeSqlScript(
+                    connection,
+                    new ClassPathResource("database/orders/add-items-to-order.sql")
             );
         }
     }
@@ -503,9 +498,9 @@ class OrderControllerIntegrationTest {
     @DisplayName("""
             When method getOrderHistory is called with authorised user,
             Order not empty
-            Then the list OrderItemDto should be returned.
+            Then the OrderItemDto should be returned.
             """)
-    public void getOrderItem_WithNotEmptyOrder_ShouldReturnListOrderItemDto()
+    public void getOrderItem_WithNotEmptyOrder_ShouldReturnOrderItemDto()
             throws Exception {
         // Given
         Long orderId = 1L;

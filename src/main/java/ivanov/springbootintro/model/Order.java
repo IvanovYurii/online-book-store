@@ -39,6 +39,7 @@ public class Order {
     private User user;
 
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "varchar(255)")
     private Status status;
 
     @Column(nullable = false)

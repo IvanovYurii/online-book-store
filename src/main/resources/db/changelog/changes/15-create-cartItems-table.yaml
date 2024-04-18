@@ -17,12 +17,18 @@ databaseChangeLog:
                   name: shopping_carts_id
                   type: bigint
                   constraints:
+                    foreignKeyName: fk_cart_item_shopping_carts_id
+                    references:  shopping_carts(id)
                     nullable: false
+                    deleteCascade: false
               - column:
                   name: book_id
                   type: bigint
                   constraints:
+                    foreignKeyName: fk_cart_item_book_id
+                    references: books(id)
                     nullable: false
+                    deleteCascade: false
               - column:
                   name: quantity
                   type: integer

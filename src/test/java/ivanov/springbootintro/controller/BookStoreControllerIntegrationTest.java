@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Set;
 import javax.sql.DataSource;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -77,16 +77,7 @@ class BookStoreControllerIntegrationTest {
             connection.setAutoCommit(true);
             ScriptUtils.executeSqlScript(
                     connection,
-                    new ClassPathResource("database/books/remove-all-books.sql")
-            );
-            ScriptUtils.executeSqlScript(
-                    connection,
-                    new ClassPathResource("database/categories/remove-all-categories.sql")
-            );
-            ScriptUtils.executeSqlScript(
-                    connection,
-                    new ClassPathResource("database/categories/remove-all-assign-"
-                            + "categories-to-book.sql")
+                    new ClassPathResource("database/remove-all-data.sql")
             );
         }
     }
@@ -117,11 +108,15 @@ class BookStoreControllerIntegrationTest {
                     connection,
                     new ClassPathResource("database/categories/add-four-default-categories.sql")
             );
+            ScriptUtils.executeSqlScript(
+                    connection,
+                    new ClassPathResource("database/categories/assign-category-to-book-data.sql")
+            );
         }
     }
 
-    @AfterEach
-    void afterEach(@Autowired DataSource dataSource) {
+    @AfterAll
+    static void afterAll(@Autowired DataSource dataSource) {
         teardown(dataSource);
     }
 
@@ -521,10 +516,10 @@ class BookStoreControllerIntegrationTest {
             Then the status No Content should be returned.
             Book by id delete.
             """)
-    public void deleteBookById_WithValidRequestDto_SShouldReturnStatusNoContent() throws Exception {
+    public void deleteBookById_WithValidRequestDto_ShouldReturnStatusNoContent() throws Exception {
         // Given
         Long id = 1L;
-        List<Book> expected = bookRepository.findAll();
+        Long expectedSize = bookRepository.countByIsDeletedFalse();
         // When
         mockMvc.perform(
                         delete("/api/books/{id}", id)
@@ -533,8 +528,8 @@ class BookStoreControllerIntegrationTest {
                 .andExpect(status().isNoContent())
                 .andReturn();
         // Then
-        List<Book> actual = bookRepository.findAll();
-        Assertions.assertEquals(expected.size() - 1, actual.size());
+        Long actualSize = bookRepository.countByIsDeletedFalse();
+        Assertions.assertEquals(expectedSize - 1, actualSize);
         Book deletedBook = bookRepository.findById(id).orElse(null);
         Assertions.assertNull(deletedBook);
     }
@@ -611,13 +606,24 @@ class BookStoreControllerIntegrationTest {
         // Given
         BookSearchParameters bookSearchParameters = new BookSearchParameters(
                 new String[]{"1984", "The Great Gatsby"},
-                new String[]{"George Orwell", "F. Scott Fitzgerald"}
-        );
+                new String[]{"George Orwell", "F. Scott Fitzgerald"},
+                new String[]{"978-0743273565", "978-0061120084", "978-0061120084"},
+                BigDecimal.valueOf(11.00),
+                BigDecimal.valueOf(120.00),
+                "novel",
+                new String[]{"2", "3", "1"});
+        BookDto expected = bookMapper.toDto(bookRepository.findById(1L).orElseThrow());
         // When
         MvcResult result = mockMvc.perform(
                         get("/api/books/search")
                                 .param("titles", bookSearchParameters.titles())
                                 .param("authors", bookSearchParameters.authors())
+                                .param("isbn", bookSearchParameters.isbn())
+                                .param("priceFrom",
+                                        String.valueOf(bookSearchParameters.priceFrom()))
+                                .param("priceTo", String.valueOf(bookSearchParameters.priceTo()))
+                                .param("description", bookSearchParameters.description())
+                                .param("categoryIds", bookSearchParameters.categoryIds())
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(status().isOk())
@@ -626,13 +632,8 @@ class BookStoreControllerIntegrationTest {
         BookDto[] actual = objectMapper.readValue(result.getResponse()
                 .getContentAsString(), BookDto[].class);
         Assertions.assertNotNull(actual);
-        Assertions.assertEquals(2, actual.length);
-        Assertions.assertEquals(1, actual[0].getId());
-        Assertions.assertEquals(3, actual[1].getId());
-        Assertions.assertEquals("The Great Gatsby", actual[0].getTitle());
-        Assertions.assertEquals("1984", actual[1].getTitle());
-        Assertions.assertEquals("F. Scott Fitzgerald", actual[0].getAuthor());
-        Assertions.assertEquals("George Orwell", actual[1].getAuthor());
+        Assertions.assertEquals(1, actual.length);
+        Assertions.assertTrue(EqualsBuilder.reflectionEquals(expected, actual[0]));
     }
 
     @WithMockUser(username = "admin")
@@ -645,14 +646,24 @@ class BookStoreControllerIntegrationTest {
     public void searchBook_WithNotPresentParameters_ShouldReturnEmptyList() throws Exception {
         // Given
         BookSearchParameters bookSearchParameters = new BookSearchParameters(
-                new String[]{"1984 years"},
-                new String[]{"mr. George Orwell"}
-        );
+                new String[]{"1984", "The Great Gatsby"},
+                new String[]{"George Orwell", "F. Scott Fitzgerald"},
+                new String[]{"978-0743273565", "978-0061120084", "978-0061120084"},
+                BigDecimal.valueOf(1100.00),
+                BigDecimal.valueOf(1200.00),
+                "novel",
+                new String[]{"2", "3", "1"});
         // When
         MvcResult result = mockMvc.perform(
                         get("/api/books/search")
                                 .param("titles", bookSearchParameters.titles())
                                 .param("authors", bookSearchParameters.authors())
+                                .param("isbn", bookSearchParameters.isbn())
+                                .param("priceFrom",
+                                        String.valueOf(bookSearchParameters.priceFrom()))
+                                .param("priceTo", String.valueOf(bookSearchParameters.priceTo()))
+                                .param("description", bookSearchParameters.description())
+                                .param("categoryIds", bookSearchParameters.categoryIds())
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(status().isOk())

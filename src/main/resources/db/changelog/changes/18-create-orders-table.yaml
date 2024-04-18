@@ -16,6 +16,11 @@ databaseChangeLog:
               - column:
                   name: user_id
                   type: bigint
+                  constraints:
+                    foreignKeyName: fk_orders_user_id
+                    references: users(id)
+                    nullable: false
+                    deleteCascade: false
               - column:
                   name: status
                   type: varchar(255)

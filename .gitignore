@@ -18,7 +18,6 @@ target/
 *.iws
 *.iml
 *.ipr
-*.env
 
 ### NetBeans ###
 /nbproject/private/
@@ -34,3 +33,6 @@ build/
 .vscode/
 /mvnw.cmd
 /mvnw
+
+# Ignore .env file
+*.env

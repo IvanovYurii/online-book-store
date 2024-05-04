@@ -33,3 +33,6 @@ build/
 .vscode/
 /mvnw.cmd
 /mvnw
+
+# Ignore .env file
+*.env

@@ -17,10 +17,9 @@
 </div>
 
 ---
-<picture style="display: inline-block; vertical-align: middle;">
-  <img src="images/table-of-contents-icon.png" alt="Table of contents icon" style="vertical-align: middle;">
-</picture>
-<h2 id="table-of-contents" style="display: inline; vertical-align: middle;">Table of contents</h2>
+
+<img id="table-of-contents" alt="Table of contents icon" src="images/table-of-contents-icon.png" title="Table of contents"/>
+<h2 style="display: inline; vertical-align: middle;">Table of contents</h2>
 
 - [Inspiration for the Project](#inspiration-for-the-project)
 - [The problem that the Project solves](#the-problem-that-the-project-solves)
@@ -48,10 +47,10 @@
 
 ---
 
-<picture style="display: inline-block; vertical-align: middle;">
+<picture id="inspiration-for-the-project">
     <img src="images/inspiration-for-the-project-icon.png" alt="Inspiration for the Project icon" />
 </picture>
-<h2 id="inspiration-for-the-project" style="display: inline; vertical-align: middle;">Inspiration for the Project</h2>
+<h2 style="display: inline; vertical-align: middle;">Inspiration for the Project</h2>
 
 Creating a convenient and efficient way to purchase books in the online store was inspired by the desire to facilitate the process of choosing 
 and purchasing books for users. The vision was to develop a platform that would allow users to easily search for books by various criteria, 
@@ -62,7 +61,7 @@ convenient and accessible.
 
 ---
 
-<picture style="display: inline-block; vertical-align: middle;">
+<picture>
   <img src="images/the-problem-that-the-project-solves-icon.png" alt="The problem that the Project solves icon" style="vertical-align: middle;">
 </picture>
 <h2 id="the-problem-that-the-project-solves" style="display: inline; vertical-align: middle; margin: 0;">The problem that the Project solves</h2>
@@ -92,6 +91,7 @@ shopping carts, which makes the shopping process more transparent and efficient 
 <picture style="display: inline-block; vertical-align: middle;">
   <img src="images/technologies-used-icon.png" alt="Technologies used icon" style="vertical-align: middle;">
 </picture>
+<h1 style="margin: 0; padding: 0; height: 60px; visibility: hidden;">&nbsp;</h1> <!-- Невидимий заголовок для простору -->
 <h2 id="technologies-used" style="display: inline; vertical-align: middle; margin: 0;">Technologies used</h2>
 
 * <picture><img src="images/java-icon.png"></picture> Java 17+

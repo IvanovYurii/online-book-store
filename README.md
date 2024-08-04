@@ -68,10 +68,9 @@ The main problem that the project aims to solve is to create a convenient and si
 Traditional bookstores can be limited in selection and availability, while this project allows users to easily find and purchase books directly 
 from their home computer or mobile device. In addition, the project solves the problem of the lack of a convenient tool for managing orders and 
 shopping carts, which makes the shopping process more transparent and efficient for users.
-<div style="text-align: right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
-<div id="advantages-of-the-project" style="font-size: 16px;"></div>
+<div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </div>
-
+<div id="advantages-of-the-project" style="font-size: 16px;">
 ---
 
 ## <picture><img alt="Advantages of the Project icon" src="images/advantages-of-the-project-icon.png" style="vertical-align: middle;"></picture> Advantages of the Project

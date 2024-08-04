@@ -17,8 +17,11 @@
 </div>
 
 ---
+<picture style="display: inline-block; vertical-align: middle;">
+  <img src="images/table-of-contents-icon.png" alt="Table of contents icon" style="vertical-align: middle;">
+</picture>
+<h2 id="table-of-contents" style="display: inline; vertical-align: middle;">Table of contents</h2>
 
-## <picture><img src="images/table-of-contents-icon.png"></picture> Table of contents[](#table-of-contents)
 - [Inspiration for the Project](#inspiration-for-the-project)
 - [The problem that the Project solves](#the-problem-that-the-project-solves)
 - [Advantages of the Project](#advantages-of-the-project)
@@ -45,7 +48,10 @@
 
 ---
 
-## <picture><img src="images/inspiration-for-the-project-icon.png"></picture> Inspiration for the Project[](#inspiration-for-the-project)
+<picture style="display: inline-block; vertical-align: middle;">
+    <img src="images/inspiration-for-the-project-icon.png" alt="Inspiration for the Project icon" />
+</picture>
+<h2 id="inspiration-for-the-project" style="display: inline; vertical-align: middle;">Inspiration for the Project</h2>
 
 Creating a convenient and efficient way to purchase books in the online store was inspired by the desire to facilitate the process of choosing 
 and purchasing books for users. The vision was to develop a platform that would allow users to easily search for books by various criteria, 
@@ -56,7 +62,10 @@ convenient and accessible.
 
 ---
 
-## <picture><img src="images/the-problem-that-the-project-solves-icon.png"></picture> The problem that the Project solves[](#the-problem-that-the-project-solves)
+<picture style="display: inline-block; vertical-align: middle;">
+  <img src="images/the-problem-that-the-project-solves-icon.png" alt="The problem that the Project solves icon" style="vertical-align: middle;">
+</picture>
+<h2 id="the-problem-that-the-project-solves" style="display: inline; vertical-align: middle; margin: 0;">The problem that the Project solves</h2>
 
 The main problem that the project aims to solve is to create a convenient and simple way to purchase books in an online format. 
 Traditional bookstores can be limited in selection and availability, while this project allows users to easily find and purchase books directly 
@@ -66,7 +75,11 @@ shopping carts, which makes the shopping process more transparent and efficient 
 
 ---
 
-## <picture><img src="images/advantages-of-the-project-icon.png"></picture> Advantages of the Project[](#advantages-of-the-project)
+<picture style="display: inline-block; vertical-align: middle;">
+  <img src="images/advantages-of-the-project-icon.png" alt="Advantages of the Project icon" style="vertical-align: middle;">
+</picture>
+<h2 id="advantages-of-the-project" style="display: inline; vertical-align: middle; margin: 0;">Advantages of the Project</h2>
+
 * Convenience: Users can easily search for books and make purchases online without having to visit a physical store.
 * Wide Selection: The platform offers a wide range of books by different authors and genres, meeting the needs of various readers.
 * Convenient Order Management: Built-in services allow users to easily add books to the cart, place orders, and track their status.
@@ -76,7 +89,11 @@ shopping carts, which makes the shopping process more transparent and efficient 
 
 ---
 
-## <picture><img src="images/technologies-used-icon.png"></picture> Technologies used[](#technologies-used)
+<picture style="display: inline-block; vertical-align: middle;">
+  <img src="images/technologies-used-icon.png" alt="Technologies used icon" style="vertical-align: middle;">
+</picture>
+<h2 id="technologies-used" style="display: inline; vertical-align: middle; margin: 0;">Technologies used</h2>
+
 * <picture><img src="images/java-icon.png"></picture> Java 17+
 * <picture><img src="images/maven-icon.png"></picture> Maven
 * <picture><img src="images/springboot-icon.png"></picture> Spring Boot
@@ -96,18 +113,27 @@ shopping carts, which makes the shopping process more transparent and efficient 
 
 ---
 
-## <picture><img src="images/clone-icon.png"></picture> Clone sources[](#clone-sources)
-jkhjk
+<picture style="display: inline-block; vertical-align: middle;">
+  <img src="images/clone-icon.png" alt="Clone sources icon" style="vertical-align: middle;">
+</picture>
+<h2 id="clone-sources" style="display: inline; vertical-align: middle; margin: 0;">Clone sources</h2>
 <div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 
 ---
 
-## <picture><img src="images/build-and-launch-the-project-icon.png"></picture> Build and launch the Project[](#build-and-launch-the-project)
+<picture style="display: inline-block; vertical-align: middle;">
+  <img src="images/build-and-launch-the-project-icon.png" alt="Build and launch the Project icon" style="vertical-align: middle;">
+</picture>
+<h2 id="build-and-launch-the-project" style="display: inline; vertical-align: middle; margin: 0;">Build and launch the Project</h2>
 <div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 
 ---
+
+<picture style="display: inline-block; vertical-align: middle;">
+  <img src="images/database-structure-icon.png" alt="Database structure icon" style="vertical-align: middle;">
+</picture>
+<h2 id="database-structure" style="display: inline; vertical-align: middle; margin: 0;">Database structure</h2>
   
-## <picture><img src="images/database-structure-icon.png"></picture> Database structure[](#database-structure)  
 <picture><img src="images/scheme-picture.png"></picture>
 <div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 

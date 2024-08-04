@@ -1,11 +1,10 @@
-<h1 style="text-align: center; font-size: 2.5em; font-weight: bold; margin-block-start: 1em; margin-block-end: 1em;">
+<h1 align="center" style="display: block; font-size: 2.5em; font-weight: bold; margin-block-start: 1em; margin-block-end: 1em;">
 <picture>
           <img src="images/online-book-store-picture.png" alt="BookWorld Logo">
 </picture>
   <br /><br /><strong>BookWorld: Online Book Store</strong>
 </h1>
-
-<div style="text-align: center; font-size: 24px;">
+<p align="center" style="text-decoration: none">
   Help & Feedback
   <br />
   <br />
@@ -14,7 +13,8 @@
   <a href="https://github.com/IvanovYurii/online-book-store/issues/new?assignees=&labels=enhancement&template=FEATURE_REQUEST.md&title=feat%3A+">Request a Feature</a>
   <>
   <a href="https://github.com/IvanovYurii/online-book-store/discussions">Ask a Question</a>
-</div>
+</p>
+
 <div id="table-of-contents" style="font-size: 16px;">
 
 ---
@@ -57,7 +57,7 @@ and purchasing books for users. The vision was to develop a platform that would 
 conveniently make purchases, and track their statuses. Against the background of the growing popularity of online shopping, especially in the 
 context of the pandemic, it was important to provide an alternative to traditional bookstores and make the process of book purchases more 
 convenient and accessible.
-<div style="text-align: right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
+<div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </div>
 <div id="the-problem-that-the-project-solves" style="font-size: 16px;">
 
@@ -80,7 +80,7 @@ shopping carts, which makes the shopping process more transparent and efficient 
 * Convenient Order Management: Built-in services allow users to easily add books to the cart, place orders, and track their status.
 * Efficiency and Accessibility: The project makes the process of purchasing books more efficient and accessible, reducing barriers to access to literary works.
 * Integration with Other Applications: The application can be easily integrated with other websites or applications, expanding its functionality and user reach.
-<div style="text-align: right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
+<div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 <div id="technologies-used" style="font-size: 16px;">
 
 ---
@@ -101,21 +101,21 @@ shopping carts, which makes the shopping process more transparent and efficient 
 * <picture><img src="images/testcontainers-icon.png"></picture> Testcontainers
 * <picture><img src="images/docker-icon.png"></picture> Docker
 * <picture><img src="images/swagger-icon.png"></picture> Swagger
-<div style="text-align: right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
+<div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </div>
 <div id="clone-sources" style="font-size: 16px;">
 
 ---
 
 ## <picture><img alt="Clone sources icon" src="images/clone-icon.png" style="vertical-align: middle;"></picture> Clone sources
-<div style="text-align: right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
+<div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </div>
 <div id="build-and-launch-the-project" style="font-size: 16px;">
 
 ---
 
 ## <picture><img alt="Build and launch the Project icon" src="images/build-and-launch-the-project-icon.png" style="vertical-align: middle;"></picture> Build and launch the Project
-<div style="text-align: right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
+<div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </div>
 <div id="entities" style="font-size: 16px;">
 
@@ -189,7 +189,7 @@ The Order entity represents details about a user's order, including the time and
 An OrderItem entity represents information about a book and is included within the order.
 </blockquote>
 </details>
-<div style="text-align: right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
+<div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </div>
 
 ---
@@ -199,7 +199,7 @@ An OrderItem entity represents information about a book and is included within t
 ## <picture><img alt="Database structure icon" src="images/database-structure-icon.png" style="vertical-align: middle;"></picture> Database structure
   
 <picture><img src="images/scheme-picture.png"></picture>
-<div style="text-align: right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
+<div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 
 ---
 
@@ -209,4 +209,4 @@ An OrderItem entity represents information about a book and is included within t
   [Clone Project in IntelliJ IDEA Ultimate](https://github.com/user-attachments/assets/75445a6d-c10e-4fb6-9254-3be1fcaf3e5f)
 
 </details>
-<div style="text-align: right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
+<div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>

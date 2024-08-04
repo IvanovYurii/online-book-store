@@ -1,5 +1,3 @@
-<div style="font-size: 16px;">
-
 <h1 style="text-align: center; font-size: 2.5em; font-weight: bold; margin-block-start: 1em; margin-block-end: 1em;">
 <picture>
           <img src="images/online-book-store-picture.png" alt="BookWorld Logo">
@@ -17,10 +15,9 @@
   <>
   <a href="https://github.com/IvanovYurii/online-book-store/discussions">Ask a Question</a>
 </div>
+<div id="table-of-contents" style="font-size: 16px;">
 
 ---
-
-<div id="table-of-contents"></div>
 
 ## <picture><img alt="Table of contents icon" src="images/table-of-contents-icon.png" title="Table of contents" style="vertical-align: middle;"></picture> Table of contents
 - [Inspiration for the Project](#inspiration-for-the-project)
@@ -49,10 +46,10 @@
 - [License](#license)
 - [Call to action](#call-to-action)
 - [Thank you all!](#thank-you-all)
+</div>
+<div id="inspiration-for-the-project" style="font-size: 16px;">
 
 ---
-
-<div id="inspiration-for-the-project"></div>
 
 ## <picture><img alt="Inspiration for the Project icon" src="images/inspiration-for-the-project-icon.png" style="vertical-align: middle;"></picture> Inspiration for the Project
 Creating a convenient and efficient way to purchase books in the online store was inspired by the desire to facilitate the process of choosing 
@@ -61,10 +58,10 @@ conveniently make purchases, and track their statuses. Against the background of
 context of the pandemic, it was important to provide an alternative to traditional bookstores and make the process of book purchases more 
 convenient and accessible.
 <div style="text-align: right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
+</div>
+<div id="the-problem-that-the-project-solves" style="font-size: 16px;">
 
 ---
-
-<div id="the-problem-that-the-project-solves"></div>
 
 ## <picture><img alt="The problem that the Project solves icon" src="images/the-problem-that-the-project-solves-icon.png" style="vertical-align: middle;"></picture> The problem that the Project solves
 The main problem that the project aims to solve is to create a convenient and simple way to purchase books in an online format. 
@@ -72,10 +69,10 @@ Traditional bookstores can be limited in selection and availability, while this 
 from their home computer or mobile device. In addition, the project solves the problem of the lack of a convenient tool for managing orders and 
 shopping carts, which makes the shopping process more transparent and efficient for users.
 <div style="text-align: right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
+<div id="advantages-of-the-project" style="font-size: 16px;"></div>
+</div>
 
 ---
-
-<div id="advantages-of-the-project"></div>
 
 ## <picture><img alt="Advantages of the Project icon" src="images/advantages-of-the-project-icon.png" style="vertical-align: middle;"></picture> Advantages of the Project
 * Convenience: Users can easily search for books and make purchases online without having to visit a physical store.
@@ -84,10 +81,9 @@ shopping carts, which makes the shopping process more transparent and efficient 
 * Efficiency and Accessibility: The project makes the process of purchasing books more efficient and accessible, reducing barriers to access to literary works.
 * Integration with Other Applications: The application can be easily integrated with other websites or applications, expanding its functionality and user reach.
 <div style="text-align: right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
+<div id="technologies-used" style="font-size: 16px;">
 
 ---
-
-<div id="technologies-used"></div>
 
 ## <picture><img alt="Technologies used icon" src="images/technologies-used-icon.png" style="vertical-align: middle;"></picture> Technologies used
 * <picture><img src="images/java-icon.png"></picture> Java 17+
@@ -106,30 +102,30 @@ shopping carts, which makes the shopping process more transparent and efficient 
 * <picture><img src="images/docker-icon.png"></picture> Docker
 * <picture><img src="images/swagger-icon.png"></picture> Swagger
 <div style="text-align: right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
+</div>
+<div id="clone-sources" style="font-size: 16px;">
 
 ---
-
-<div id="clone-sources"></div>
 
 ## <picture><img alt="Clone sources icon" src="images/clone-icon.png" style="vertical-align: middle;"></picture> Clone sources
 <div style="text-align: right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
+</div>
+<div id="build-and-launch-the-project" style="font-size: 16px;">
 
 ---
-
-<div id="build-and-launch-the-project"></div>
 
 ## <picture><img alt="Build and launch the Project icon" src="images/build-and-launch-the-project-icon.png" style="vertical-align: middle;"></picture> Build and launch the Project
 <div style="text-align: right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
+</div>
+<div id="entities" style="font-size: 16px;">
 
 ---
-
-<div id="entities"></div>
 
 ## <picture><img alt="Entities icon" src="images/entity-icon.png" style="vertical-align: middle;"></picture> Entities
 <div id="user-entity"></div>
 
 ### <picture><img alt="User icon" src="images/user-icon.png" style="vertical-align: middle;"></picture> User
-<details open><summary title="Click to show/hide details">Click to show/hide <strong>User entity</strong>.</summary><br/>
+<details><summary title="Click to show/hide details">Click to show/hide <strong>User entity</strong>.</summary><br/>
 <blockquote>
 The user entity represents information about registered users who have their own shopping cart with which they can manipulate,
 add and delete selected books and then proceed to the order processing stage.
@@ -138,7 +134,7 @@ add and delete selected books and then proceed to the order processing stage.
 <div id="role-entity"></div>
 
 ### <picture><img alt="Role icon" src="images/role-icon.png" style="vertical-align: middle;"></picture> Role
-<details open><summary title="Click to show/hide details">Click to show/hide <strong>Role entity</strong>.</summary><br/>
+<details><summary title="Click to show/hide details">Click to show/hide <strong>Role entity</strong>.</summary><br/>
 <blockquote>
 The role determines the user's level of access to the system. Each user is assigned a specific role. There are currently
 two types of roles: USER and ADMINISTRATOR. The USER can view and edit their own orders and selected books, create orders,
@@ -148,7 +144,7 @@ and the ADMINISTRATOR has the ability to add, delete and update data.
 <div id="book-entity"></div>
 
 ### <picture><img alt="Book icon" src="images/book-icon.png" style="vertical-align: middle;"></picture> Book
-<details open><summary title="Click to show/hide details">Click to show/hide <strong>Book entity</strong>.</summary><br/>
+<details><summary title="Click to show/hide details">Click to show/hide <strong>Book entity</strong>.</summary><br/>
 <blockquote>
 The purpose of the book is to provide a comprehensive description of the book available on the service.
 </blockquote>
@@ -156,7 +152,7 @@ The purpose of the book is to provide a comprehensive description of the book av
 <div id="category-entity"></div>
 
 ### <picture><img alt="Category icon" src="images/category-icon.png" style="vertical-align: middle;"></picture> Category
-<details open><summary title="Click to show/hide details">Click to show/hide <strong>Category entity</strong>.</summary><br/>
+<details><summary title="Click to show/hide details">Click to show/hide <strong>Category entity</strong>.</summary><br/>
 <blockquote>
 The core of the category enables you to classify books into different groups and enhances their searchability.
 </blockquote>
@@ -164,7 +160,7 @@ The core of the category enables you to classify books into different groups and
 <div id="shopping-cart-entity"></div>
 
 ### <picture><img alt="ShoppingCart icon" src="images/shopping-cart-icon.png" style="vertical-align: middle;"></picture> ShoppingCart
-<details open><summary title="Click to show/hide details">Click to show/hide <strong>ShoppingCart entity</strong>.</summary><br/>
+<details><summary title="Click to show/hide details">Click to show/hide <strong>ShoppingCart entity</strong>.</summary><br/>
 <blockquote>
 The ShoppingCart for a user is a space where the books the user has selected for purchase are kept.
 </blockquote>
@@ -172,7 +168,7 @@ The ShoppingCart for a user is a space where the books the user has selected for
 <div id="cart-item-entity"></div>
 
 ### <picture><img alt="CartItem icon" src="images/item-icon.png" style="vertical-align: middle;"></picture> CartItem
-<details open><summary title="Click to show/hide details">Click to show/hide <strong>CartItem entity</strong>.</summary><br/>
+<details><summary title="Click to show/hide details">Click to show/hide <strong>CartItem entity</strong>.</summary><br/>
 <blockquote>
 A CartItem entity represents an individual item in the cart, containing specific information about a book.
 </blockquote>
@@ -180,7 +176,7 @@ A CartItem entity represents an individual item in the cart, containing specific
 <div id="order-entity"></div>
 
 ### <picture><img alt="Order icon" src="images/order-icon.png" style="vertical-align: middle;"></picture> Order
-<details open><summary title="Click to show/hide details">Click to show/hide <strong>Order entity</strong>.</summary><br/>
+<details><summary title="Click to show/hide details">Click to show/hide <strong>Order entity</strong>.</summary><br/>
 <blockquote>
 The Order entity represents details about a user's order, including the time and delivery address, and contains the order items.
 </blockquote>
@@ -188,12 +184,13 @@ The Order entity represents details about a user's order, including the time and
 <div id="order-item-entity"></div>
 
 ### <picture><img alt="OrderItem icon" src="images/item-icon.png" style="vertical-align: middle;"></picture> OrderItem
-<details open><summary title="Click to show/hide details">Click to show/hide <strong>OrderItem entity</strong>.</summary><br/>
+<details><summary title="Click to show/hide details">Click to show/hide <strong>OrderItem entity</strong>.</summary><br/>
 <blockquote>
 An OrderItem entity represents information about a book and is included within the order.
 </blockquote>
 </details>
 <div style="text-align: right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
+</div>
 
 ---
 
@@ -213,5 +210,3 @@ An OrderItem entity represents information about a book and is included within t
 
 </details>
 <div style="text-align: right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
-
-</div>

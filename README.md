@@ -89,11 +89,7 @@ shopping carts, which makes the shopping process more transparent and efficient 
 
 ---
 
-<picture style="display: inline-block; vertical-align: middle;">
-  <img src="images/technologies-used-icon.png" alt="Technologies used icon" style="vertical-align: middle;">
-</picture>
-<h2 id="technologies-used" style="display: inline; vertical-align: middle; margin: 0;">Technologies used</h2>
-
+## <picture><img src="images/technologies-used-icon.png"></picture> Technologies used[](#technologies-used)
 * <picture><img src="images/java-icon.png"></picture> Java 17+
 * <picture><img src="images/maven-icon.png"></picture> Maven
 * <picture><img src="images/springboot-icon.png"></picture> Spring Boot

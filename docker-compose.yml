@@ -20,7 +20,7 @@ services:
 
   app:
     image: online-book-store
-    container_name: shop-keeper-app
+    container_name: online-book-store-app
     build:
       context: .
       dockerfile: Dockerfile

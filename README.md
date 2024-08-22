@@ -238,7 +238,9 @@ We just launched the server. How to work with the application is described in th
 <br>
 <div align="center" style="font-size: xx-large">
 <details><summary title="Click Here to View the Complete Video Tutorial">Click Here to View the Complete Video Tutorial</summary><br/>
-Click Here to View the Complete Video Tutorial
+          
+[Build-with-IDE-and-MySQL](https://github.com/user-attachments/assets/0859093b-ea14-4980-8a31-728f1c7e4c50.webm)
+
 <div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </details>
 </div>
@@ -692,7 +694,7 @@ and **token**. ***Save the settings***. Now you can test the application.
 
 <details>
   <summary>Click Here to View the Complete Video Tutorial</summary>
-
+          
 [Working with Postman](https://github.com/IvanovYurii/video/blob/main/Build-with-IDE-and-MySQL_compress_lv3.mp4)
 
 </details>

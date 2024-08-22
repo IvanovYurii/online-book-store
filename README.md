@@ -693,7 +693,7 @@ and **token**. ***Save the settings***. Now you can test the application.
 <details>
   <summary>Click Here to View the Complete Video Tutorial</summary>
 
-[Working with Postman](https://github.com/user-attachments/assets/75445a6d-c10e-4fb6-9254-3be1fcaf3e5f.webm)
+[Working with Postman](https://github.com/IvanovYurii/video/blob/main/Build-with-IDE-and-MySQL_compress_lv3.mp4)
 
 </details>
 

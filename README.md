@@ -311,7 +311,7 @@ Start <picture><img src="images/docker-icon.png" alt="mysql-icon"></picture> **D
 
 Run the command in the **IDE terminal**.
 ```sh
-> docker-compose up --build
+docker-compose up --build
 ``` 
 
 **Step 6.**
@@ -364,7 +364,7 @@ Start <picture><img src="images/docker-icon.png" alt="mysql-icon"></picture> Doc
 
 Run the command in the terminal
 ```sh
-> docker network create my-network
+docker network create my-network
 ``` 
 This will create a new network named **my-network.**
 
@@ -372,7 +372,7 @@ This will create a new network named **my-network.**
 
 Run the command in the terminal 
 ```sh
-> docker run --name mysql-db --network my-network -e MYSQL_ROOT_PASSWORD=12345678 -e MYSQL_DATABASE=book -p 3307:3306 -d mysql
+docker run --name mysql-db --network my-network -e MYSQL_ROOT_PASSWORD=12345678 -e MYSQL_DATABASE=book -p 3307:3306 -d mysql
 ``` 
 This command starts a **MySQL** database in **Docker**. It sets up the database with the name mysql-db on the **my-network**
 network, creates a **root password**, sets up a **database** called **book**, and makes it accessible on port **3307** on your computer.
@@ -381,7 +381,7 @@ network, creates a **root password**, sets up a **database** called **book**, an
 
 Run the command in the terminal
 ```sh
-> docker run -p 8081:8080 --network my-network --name online-book-store-app -e SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/book?serverTimeZone=UTC -e SPRING_DATASOURCE_USERNAME=root -e SPRING_DATASOURCE_PASSWORD=12345678 -e JWT_EXPIRATION=3000000 -e JWT_SECRET_STRING=online-book-store-ivanov.yuriitrsthrt6rujryyjethe5ye56yh6e5 ivanovyurii/online-book-store:latest
+docker run -p 8081:8080 --network my-network --name online-book-store-app -e SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/book?serverTimeZone=UTC -e SPRING_DATASOURCE_USERNAME=root -e SPRING_DATASOURCE_PASSWORD=12345678 -e JWT_EXPIRATION=3000000 -e JWT_SECRET_STRING=online-book-store-ivanov.yuriitrsthrt6rujryyjethe5ye56yh6e5 ivanovyurii/online-book-store:latest
 ``` 
 This command runs an **online book store** application, connects it to the **MySQL** database, configures **JWT** parameters, 
 and exposes the application on **port 8081** of your computer.

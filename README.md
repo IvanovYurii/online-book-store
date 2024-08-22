@@ -79,6 +79,7 @@ shopping carts, which makes the shopping process more transparent and efficient 
 <div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </div>
 <div id="advantages-of-the-project" style="font-size: 16px;">
+
 ---
 
 ## <picture><img alt="Advantages of the Project icon" src="images/advantages-of-the-project-icon.png" style="vertical-align: middle;"></picture> Advantages of the Project
@@ -136,7 +137,8 @@ No installation or setup required; simply use the project without spending time 
 http://ec2-44-201-114-138.compute-1.amazonaws.com
 ```
 ***Swagger***
->http://ec2-44-201-114-138.compute-1.amazonaws.com/swagger-ui/index.html#/
+> <a href="http://localhost:8080/swagger-ui/index.html#/" target="_blank">http://ec2-44-201-114-138.compute-1.amazonaws.com/swagger-ui/index.html#/</a>
+
 <div style="border: 1px solid red; padding: 10px; background-color: #f8d7da; color: #721c24;">
 <strong>IMPORTANT:</strong>
 How to work with the application is described in the section
@@ -225,17 +227,19 @@ http://localhost:8080
 ```
 
 ***Swagger***
-> http://localhost:8080/swagger-ui/index.html#/
+> <a href="http://localhost:8080/swagger-ui/index.html#/" target="_blank">http://localhost:8080/swagger-ui/index.html#/</a>
 
 <div style="border: 1px solid red; padding: 10px; background-color: #f8d7da; color: #721c24;">
 <strong>IMPORTANT:</strong> 
 We just launched the server. How to work with the application is described in the section 
 <strong><a href="#how-to-work-with-the-application">How to work with the application</a></strong>.
 </div>
+
 <br>
-<div align="center" style="font-size: x-large">
+<div align="center" style="font-size: xx-large">
 <details><summary title="Click Here to View the Complete Video Tutorial">Click Here to View the Complete Video Tutorial</summary><br/>
 Click Here to View the Complete Video Tutorial
+<div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </details>
 </div>
 </details>
@@ -243,6 +247,7 @@ Click Here to View the Complete Video Tutorial
 ---
 
 <div id="build-with-ide-docker"></div>
+
 <h3>Build with IDE and Docker</h3>
 
 In this setup, we will use a **MySQL database** running in **Docker**. This provides the advantage of easy deployment and scalability, 
@@ -316,7 +321,7 @@ http://localhost:8081
 ```
 
 ***Swagger***
-> http://localhost:8081/swagger-ui/index.html#/
+><a href="http://localhost:8080/swagger-ui/index.html#/" target="_blank">http://localhost:8081/swagger-ui/index.html#/</a>
 
 <div style="border: 1px solid red; padding: 10px; background-color: #f8d7da; color: #721c24;">
 <strong>IMPORTANT:</strong> 
@@ -327,6 +332,7 @@ We just launched the server. How to work with the application is described in th
 <div align="center" style="font-size: x-large">
 <details><summary title="Click Here to View the Complete Video Tutorial">Click Here to View the Complete Video Tutorial</summary><br/>
 Click Here to View the Complete Video Tutorial
+<div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </details>
 </div>
 </details>
@@ -335,7 +341,7 @@ Click Here to View the Complete Video Tutorial
 
 <div id="build-with-docker-dockerhub"></div>
 
-<h3>Build with *Docker* and *dockerHub images*</h3>
+<h3>Build with <b><i>Docker</i></b> and <b><i>dockerHub images</i></b></h3>
 
 In this setup, you're using **Docker** to run applications without needing to install **Java**, **Maven**, **MySQL**, or an **IDE**. 
 You simply download ready-made images from **Docker Hub**, which reduces setup time and minimizes the risk of errors. 
@@ -387,7 +393,7 @@ http://localhost:8081
 ```
 
 ***Swagger***
-> http://localhost:8081/swagger-ui/index.html#/
+> <a href="http://localhost:8080/swagger-ui/index.html#/" target="_blank">http://localhost:8081/swagger-ui/index.html#/</a>
 
 <div style="border: 1px solid red; padding: 10px; background-color: #f8d7da; color: #721c24;">
 <strong>IMPORTANT:</strong> 
@@ -404,9 +410,11 @@ Click Here to View the Complete Video Tutorial
 
 <div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </div>
-<div id="entities" style="font-size: 16px;">
+<p id="entities" style="font-size: 16px;"></p>
 
 ---
+
+<div style="font-size: 16px;">
 
 ## <picture><img alt="Entities icon" src="images/entity-icon.png" style="vertical-align: middle;"></picture> Entities
 <div id="user-entity"></div>
@@ -487,9 +495,11 @@ An OrderItem entity represents information about a book and is included within t
   
 <img src="images/scheme-picture.png" alt="scheme-picture">
 <div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
-<div id="end-points" style="font-size: 16px;">
+<p id="end-points"></p>
 
 ---
+
+<div style="font-size: 16px;">
 
 ## <picture><img alt="Entities icon" src="images/endpoints-icon.png" style="vertical-align: middle;"></picture> Endpoints
 <div id="user-end-point"></div>
@@ -545,7 +555,7 @@ An OrderItem entity represents information about a book and is included within t
 
 ---
 <p id="how-to-work-with-the-application"></p>
-<div style="font-size: 16px;">
+<br style="font-size: 16px;">
 
 ## <picture><img alt="How to work with the application" src="images/build-and-launch-the-project-icon.png" style="vertical-align: middle;"></picture> How to work with the application
 <div id="general-provisions"></div>
@@ -559,6 +569,7 @@ Before using the application, <strong><a href="#build-and-launch-the-project">st
 <details><summary title="Click to show/hide details">Click to show/hide <strong>General provisions</strong>
 </summary><br/>
 <blockquote>
+
 Let's explore how our application handles different types of **HTTP requests: GET, PUT, POST, PATCH,** 
 and **DELETE** for interacting with the **API**.
 
@@ -566,8 +577,8 @@ and **DELETE** for interacting with the **API**.
 
 * **Empty**: When no data or parameters need to be transmitted.
 * With **Parameters**: Including required and optional parameters, which can be passed through the URL or as part of the request.
-* With a **Request Body in **JSON Format**: Some requests, especially **PUT** and **POST**, require sending data in 
-* **the request body in JSON format**.
+* With a **Request Body** in **JSON Format**: Some requests, especially **PUT** and **POST**, require sending data in 
+**the request body in JSON format**.
 
 Regarding server responses, they typically include:
 
@@ -581,6 +592,8 @@ We will provide a detailed demonstration of how to work with these requests and 
 
 **Important**: for a **successful delete operation**, the response body will be **empty** and the status code will be 204 (**No Content**).
 This status code indicates that the **request was successful**, but there is no content to return in the response.
+
+Access Credentials for **Admin** and **User**
 
 <table>
   <tr>
@@ -642,10 +655,14 @@ to <strong>send</strong> and <strong>receive</strong> responses.
 
 <div id="working-with-swagger-ui"></div>
 
-<h3>Working with <picture><img src="images/swagger-icon.png" alt="swagger-icon"></picture> **Swagger UI**</h3>
+<h3>Working with <picture><img src="images/swagger-icon.png" alt="swagger-icon"></picture> <i>Swagger UI</i></h3>
+
 **Open *Swagger UI***:
-Navigate to http://localhost:<port>/swagger-ui/index.html#/ (or the equivalent AWS URL) to interact with the API documentation and test endpoints.
+
+Navigate to http://localhost:port/swagger-ui/index.html#/ (or the equivalent AWS URL) to interact with the API documentation and test endpoints.
+
 For example, the application is launched on port **8080**
+
 > http://localhost:8080/swagger-ui/index.html#/
 
 Use **Admin** or **User** data for authorization. After authorization, you can test the application.
@@ -658,12 +675,12 @@ Click Here to View the Complete Video Tutorial
 
 <div id="working-with-postman"></div>
 
-<h3>Working with <picture><img src="images/postman-icon.png" alt="postman-icon"></picture> **Postman**</h3>
+<h3>Working with <picture><img src="images/postman-icon.png" alt="postman-icon"></picture> <i>Postman</i></h3>
 
 **Step 1.**
 <p>To download the Postman Collection JSON file, visit the following link and click the "Download" button:</p>
 <a href="https://github.com/IvanovYurii/online-book-store/blob/main/BookWorld-Online-Book-Store-API.postman_collection.json" 
-target="_blank">View Postman Collection JSON on GitHub</a>
+target="_blank">View Postman Collection JSON on GitHub</a><br>
 
 **Step 2.**
 Import the collection
@@ -676,7 +693,9 @@ and **token**. ***Save the settings***. Now you can test the application.
 <details><summary title="Click Here to View the Complete Video Tutorial">Click Here to View the Complete Video Tutorial</summary><br/>
 Click Here to View the Complete Video Tutorial
 </details>
-</div>
+
+<div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
+
 </div>
 
 ---
@@ -695,7 +714,7 @@ Click Here to View the Complete Video Tutorial
 *Testing Screenshot:*
 
 <img alt="Test Scenarios and Results" src="images/test-scenarios-and-results-picture.png">
-
+<div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </div>
 
 ---
@@ -706,6 +725,7 @@ Click Here to View the Complete Video Tutorial
 This project is licensed under the **MIT license**. Feel free to edit and distribute this template as you like.
 
 See [LICENSE](LICENSE.txt) for more information.
+<div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </div>
 
 ---
@@ -716,6 +736,7 @@ Thanks to all contributors and supporters who added stars to this repository, to
 
 A special thanks to my **teachers** and **mentors**. Their knowledge and guidance were instrumental in helping me create this project. :)
 <picture><img alt="Teachers and mentors" src="images/teachers-picture.png" style="vertical-align: middle;"></picture>
+<div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </div>
 
 ---

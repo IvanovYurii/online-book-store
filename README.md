@@ -745,6 +745,8 @@ See [LICENSE](LICENSE.txt) for more information.
 Thanks to all contributors and supporters who added stars to this repository, to everyone who supports the project
 
 A special thanks to my **teachers** and **mentors**. Their knowledge and guidance were instrumental in helping me create this project. :)
+<br>
+<br>
 <picture><img alt="Teachers and mentors" src="images/teachers-picture.png" style="vertical-align: middle;"></picture>
 <div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </div>

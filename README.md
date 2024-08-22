@@ -137,7 +137,7 @@ No installation or setup required; simply use the project without spending time 
 http://ec2-44-201-114-138.compute-1.amazonaws.com
 ```
 ***Swagger***
-> <a href="http://localhost:8080/swagger-ui/index.html#/" target="_blank">http://ec2-44-201-114-138.compute-1.amazonaws.com/swagger-ui/index.html#/</a>
+> <a href="http://ec2-44-201-114-138.compute-1.amazonaws.com/swagger-ui/index.html#/" target="_blank">http://ec2-44-201-114-138.compute-1.amazonaws.com/swagger-ui/index.html#/</a>
 
 <div style="border: 1px solid red; padding: 10px; background-color: #f8d7da; color: #721c24;">
 <strong>IMPORTANT:</strong>
@@ -321,7 +321,7 @@ http://localhost:8081
 ```
 
 ***Swagger***
-><a href="http://localhost:8080/swagger-ui/index.html#/" target="_blank">http://localhost:8081/swagger-ui/index.html#/</a>
+><a href="http://localhost:8081/swagger-ui/index.html#/" target="_blank">http://localhost:8081/swagger-ui/index.html#/</a>
 
 <div style="border: 1px solid red; padding: 10px; background-color: #f8d7da; color: #721c24;">
 <strong>IMPORTANT:</strong> 
@@ -393,7 +393,7 @@ http://localhost:8081
 ```
 
 ***Swagger***
-> <a href="http://localhost:8080/swagger-ui/index.html#/" target="_blank">http://localhost:8081/swagger-ui/index.html#/</a>
+> <a href="http://localhost:8081/swagger-ui/index.html#/" target="_blank">http://localhost:8081/swagger-ui/index.html#/</a>
 
 <div style="border: 1px solid red; padding: 10px; background-color: #f8d7da; color: #721c24;">
 <strong>IMPORTANT:</strong> 
@@ -568,7 +568,6 @@ Before using the application, <strong><a href="#build-and-launch-the-project">st
 
 <details><summary title="Click to show/hide details">Click to show/hide <strong>General provisions</strong>
 </summary><br/>
-<blockquote>
 
 Let's explore how our application handles different types of **HTTP requests: GET, PUT, POST, PATCH,** 
 and **DELETE** for interacting with the **API**.
@@ -633,14 +632,13 @@ password123
 </td>
   </tr>
 </table>
-</blockquote>
+
 <div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </details>
 
 <details><summary title="Click to show/hide details">Click to show/hide <strong>screenshots</strong> for <strong>JSON-formatted Text</strong>
-to <strong>send</strong> and <strong>receive</strong> responses.
-</summary><br/>
-<blockquote>
+to <strong>send</strong> and <strong>receive</strong> responses.</summary><br/>
+
 <img src="images/json-template-picture1.png" alt="json-template-picture1">
 
 <img src="images/json-template-picture2.png" alt="json-template-picture2">
@@ -649,7 +647,6 @@ to <strong>send</strong> and <strong>receive</strong> responses.
 
 <img src="images/json-template-picture4.png" alt="json-template-picture4">
 
-</blockquote>
 <div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </details>
 
@@ -678,9 +675,11 @@ Click Here to View the Complete Video Tutorial
 <h3>Working with <picture><img src="images/postman-icon.png" alt="postman-icon"></picture> <i>Postman</i></h3>
 
 **Step 1.**
-<p>To download the Postman Collection JSON file, visit the following link and click the "Download" button:</p>
+<p>To download the <b>Postman Collection JSON</b> file, visit the following link and click the "Download" button:</p>
 <a href="https://github.com/IvanovYurii/online-book-store/blob/main/BookWorld-Online-Book-Store-API.postman_collection.json" 
-target="_blank">View Postman Collection JSON on GitHub</a><br>
+target="_blank">View Postman Collection JSON on GitHub</a>
+<br>
+<br>
 
 **Step 2.**
 Import the collection
@@ -690,8 +689,12 @@ Use **Admin** or **User** data for authorization. ***Postman*** is configured to
 access endpoints. After authorization, you receive a response **token**. Configure the collection: **base_url** 
 and **token**. ***Save the settings***. Now you can test the application.
 <div align="center" style="font-size: x-large">
-<details><summary title="Click Here to View the Complete Video Tutorial">Click Here to View the Complete Video Tutorial</summary><br/>
-Click Here to View the Complete Video Tutorial
+
+<details>
+  <summary>Click Here to View the Complete Video Tutorial</summary>
+
+[Working with Postman](https://github.com/user-attachments/assets/75445a6d-c10e-4fb6-9254-3be1fcaf3e5f.webm)
+
 </details>
 
 <div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
@@ -740,11 +743,3 @@ A special thanks to my **teachers** and **mentors**. Their knowledge and guidanc
 </div>
 
 ---
-
-<details>
-  <summary>Click to show/hide video: clone Project in IntelliJ IDEA Ultimate</summary>
-
-  [Clone Project in IntelliJ IDEA Ultimate](https://github.com/user-attachments/assets/75445a6d-c10e-4fb6-9254-3be1fcaf3e5f)
-
-</details>
-<div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>

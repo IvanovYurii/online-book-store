@@ -334,7 +334,9 @@ We just launched the server. How to work with the application is described in th
 <br>
 <div align="center" style="font-size: x-large">
 <details><summary title="Click Here to View the Complete Video Tutorial">Click Here to View the Complete Video Tutorial</summary><br/>
-Click Here to View the Complete Video Tutorial
+
+[Build with IDE and Docker](https://github.com/user-attachments/assets/5e4b482c-009c-4618-98a1-434a694bb5f6.mp4)
+
 <div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </details>
 </div>
@@ -406,7 +408,9 @@ We just launched the server. How to work with the application is described in th
 <br>
 <div align="center" style="font-size: x-large">
 <details><summary title="Click Here to View the Complete Video Tutorial">Click Here to View the Complete Video Tutorial</summary><br/>
-Click Here to View the Complete Video Tutorial
+
+[Build with IDE and Docker](https://github.com/user-attachments/assets/2289e701-d39a-41b2-a87b-8b4551b1f468.mp4)
+
 </details>
 </div>
 </details>

@@ -148,7 +148,7 @@ How to work with the application is described in the section
 ---
 
 <div id="build-with-ide-mysql"></div>
-<h3>Build with IDE and MySQL</h3>
+<h3>Build with <i>IDE</i> and <i>MySQL</i></h3>
 
 In this setup, we will use a **local MySQL database**. This provides the advantage of ease of setup and full control over 
 the database, but it may be limited in performance with a large volume of data.
@@ -250,7 +250,7 @@ We just launched the server. How to work with the application is described in th
 
 <div id="build-with-ide-docker"></div>
 
-<h3>Build with IDE and Docker</h3>
+<h3>Build with <i>IDE</i> and <i>Docker</i></h3>
 
 In this setup, we will use a **MySQL database** running in **Docker**. This provides the advantage of easy deployment and scalability, 
 and can potentially enhance performance due to optimized environment. However, performance may depend on container settings 
@@ -343,7 +343,7 @@ Click Here to View the Complete Video Tutorial
 
 <div id="build-with-docker-dockerhub"></div>
 
-<h3>Build with <b><i>Docker</i></b> and <b><i>dockerHub images</i></b></h3>
+<h3>Build with <i>Docker</i> and <i>dockerHub images</i></h3>
 
 In this setup, you're using **Docker** to run applications without needing to install **Java**, **Maven**, **MySQL**, or an **IDE**. 
 You simply download ready-made images from **Docker Hub**, which reduces setup time and minimizes the risk of errors. 

@@ -279,9 +279,6 @@ See an example of a sample **<code>.env-sample</code>**
 
 **Step 3.**
 
-Start <picture><img src="images/docker-icon.png" alt="mysql-icon"></picture> **Docker**
-
-**Step 4.**
 Run the command in the **IDE terminal**.
 ```sh
 mvn clean package -DskipTests
@@ -305,6 +302,10 @@ After a successful run, you will see a similar message in the **Terminal window*
 [INFO] ------------------------------------------------------------------------
 ```
 Of course, the time depends on the power of your PC.
+
+**Step 4.**
+
+Start <picture><img src="images/docker-icon.png" alt="mysql-icon"></picture> **Docker**
 
 **Step 5.**
 

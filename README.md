@@ -683,7 +683,7 @@ Click Here to View the Complete Video Tutorial
 
 **Step 1.**
 <p>To download the <b>Postman Collection JSON</b> file, visit the following link and click the "Download" button:</p>
-<a href="https://github.com/IvanovYurii/online-book-store/blob/main/BookWorld-Online-Book-Store-API.postman_collection.json" 
+<a href="https://github.com/IvanovYurii/online-book-store/blob/Spring-boot-Add-README.md/BookWorld-Online-Book-Store-API.postman_collection.json" 
 target="_blank">View Postman Collection JSON on GitHub</a>
 <br>
 <br>

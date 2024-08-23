@@ -742,12 +742,16 @@ See [LICENSE](LICENSE.txt) for more information.
 
 ## Thank you all!
 <div id="inspiration-for-the-project" style="font-size: 16px;">
-Thanks to all contributors and supporters who added stars to this repository, to everyone who supports the project
+Thanks to all contributors and supporters who added stars to this repository, to everyone who supports the project.
 
 A special thanks to my **teachers** and **mentors**. Their knowledge and guidance were instrumental in helping me create this project. :)
 <br>
 <br>
-<picture><img alt="Teachers and mentors" src="images/teachers-picture.png" style="vertical-align: middle;"></picture>
+
+[![Ivan Kosovych](images/Ivan-Kosovych.png)](https://github.com/Ivan95kos)  [![Oleksandr Kovalenko](images/Oleksandr-Kovalenko.png)](https://github.com/olekskov)
+[![Oleh Kuzan](images/Oleh-Kuzan.png)](https://github.com/okuzan) [![Anton Kozhukhivskiy](images/Anton-Kozhukhivskiy.png)](https://github.com/kozhukhovsky)
+[![Sander Kapusniak](images/Sander-Kapusniak.png)](https://github.com/Sanderfuck) [![Olena Bruiako](images/Olena-Bruiako.png)](https://github.com/Elena-Bruyako)
+
 <div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </div>
 

@@ -748,9 +748,12 @@ A special thanks to my **teachers** and **mentors**. Their knowledge and guidanc
 <br>
 <br>
 
-[![Ivan Kosovych](images/Ivan-Kosovych.png)](https://github.com/Ivan95kos)  [![Oleksandr Kovalenko](images/Oleksandr-Kovalenko.png)](https://github.com/olekskov)
-[![Oleh Kuzan](images/Oleh-Kuzan.png)](https://github.com/okuzan) [![Anton Kozhukhivskiy](images/Anton-Kozhukhivskiy.png)](https://github.com/kozhukhovsky)
-[![Sander Kapusniak](images/Sander-Kapusniak.png)](https://github.com/Sanderfuck) [![Olena Bruiako](images/Olena-Bruiako.png)](https://github.com/Elena-Bruyako)
+[![Ivan Kosovych](images/Ivan-Kosovych.png "Ivan Kosovych")](https://github.com/Ivan95kos) 
+[![Oleksandr Kovalenko](images/Oleksandr-Kovalenko.png "Oleksandr Kovalenko")](https://github.com/olekskov)
+[![Oleh Kuzan](images/Oleh-Kuzan.png "Oleh Kuzan")](https://github.com/okuzan)
+[![Anton Kozhukhivskiy](images/Anton-Kozhukhivskiy.png "Anton Kozhukhivskiy")](https://github.com/kozhukhovsky)
+[![Sander Kapusniak](images/Sander-Kapusniak.png "Sander Kapusniak")](https://github.com/Sanderfuck)
+[![Olena Bruiako](images/Olena-Bruiako.png "Olena Bruiako")](https://github.com/Elena-Bruyako)
 
 <div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </div>

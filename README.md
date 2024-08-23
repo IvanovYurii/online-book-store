@@ -573,32 +573,6 @@ An OrderItem entity represents information about a book and is included within t
 Before using the application, <strong><a href="#build-and-launch-the-project">start the server</a></strong>.
 </div>
 
-<details><summary title="Click to show/hide details">Click to show/hide <strong>General provisions</strong>
-</summary><br/>
-
-Let's explore how our application handles different types of **HTTP requests: GET, PUT, POST, PATCH,** 
-and **DELETE** for interacting with the **API**.
-
-**Requests** can be:
-
-* **Empty**: When no data or parameters need to be transmitted.
-* With **Parameters**: Including required and optional parameters, which can be passed through the URL or as part of the request.
-* With a **Request Body** in **JSON Format**: Some requests, especially **PUT** and **POST**, require sending data in 
-**the request body in JSON format**.
-
-Regarding server responses, they typically include:
-
-* **Request Status**: An **HTTP status code** indicating the result of the request (e.g., **200 for a successful request**
-or **404 for a not found resource**).
-* **Error Message**: If an error occurs, the server may send a description of the problem to help understand the cause of the failure.
-* **JSON-formatted Text**: Data returned by the server in response is usually in **JSON format**, which provides a convenient 
-way to exchange information between the client and the server.
-
-We will provide a detailed demonstration of how to work with these requests and interpret server responses in our application.
-
-**Important**: for a **successful delete operation**, the response body will be **empty** and the status code will be 204 (**No Content**).
-This status code indicates that the **request was successful**, but there is no content to return in the response.
-
 Access Credentials for **Admin** and **User**
 
 <table>
@@ -639,6 +613,32 @@ password123
 </td>
   </tr>
 </table>
+
+<details><summary title="Click to show/hide details">Click to show/hide <strong>General provisions</strong>
+</summary><br/>
+
+Let's explore how our application handles different types of **HTTP requests: GET, PUT, POST, PATCH,** 
+and **DELETE** for interacting with the **API**.
+
+**Requests** can be:
+
+* **Empty**: When no data or parameters need to be transmitted.
+* With **Parameters**: Including required and optional parameters, which can be passed through the URL or as part of the request.
+* With a **Request Body** in **JSON Format**: Some requests, especially **PUT** and **POST**, require sending data in 
+**the request body in JSON format**.
+
+Regarding server responses, they typically include:
+
+* **Request Status**: An **HTTP status code** indicating the result of the request (e.g., **200 for a successful request**
+or **404 for a not found resource**).
+* **Error Message**: If an error occurs, the server may send a description of the problem to help understand the cause of the failure.
+* **JSON-formatted Text**: Data returned by the server in response is usually in **JSON format**, which provides a convenient 
+way to exchange information between the client and the server.
+
+We will provide a detailed demonstration of how to work with these requests and interpret server responses in our application.
+
+**Important**: for a **successful delete operation**, the response body will be **empty** and the status code will be 204 (**No Content**).
+This status code indicates that the **request was successful**, but there is no content to return in the response.
 
 <div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </details>

@@ -51,6 +51,7 @@
   - [General provisions](#general-provisions)
   - [Working with **Swagger UI**](#working-with-swagger-ui)
   - [Working with **Postman**](#working-with-postman)
+- [Tutorial Overview](#tutorial-overview)
 - [Test Scenarios and Results](#test-scenarios-and-results)
 - [License](#license)
 - [Thank you all!](#thank-you-all)
@@ -241,6 +242,8 @@ We just launched the server. How to work with the application is described in th
           
 [Build-with-IDE-and-MySQL](https://github.com/user-attachments/assets/0859093b-ea14-4980-8a31-728f1c7e4c50.webm)
 
+[If the video does not play, click here](https://youtu.be/H7nktRBSQYw)
+
 <div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </details>
 </div>
@@ -337,6 +340,8 @@ We just launched the server. How to work with the application is described in th
 
 [Build with IDE and Docker](https://github.com/user-attachments/assets/5e4b482c-009c-4618-98a1-434a694bb5f6.mp4)
 
+[If the video does not play, click here](https://youtu.be/wl7cgu-Hag4)
+
 <div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </details>
 </div>
@@ -410,6 +415,8 @@ We just launched the server. How to work with the application is described in th
 <details><summary title="Click Here to View the Complete Video Tutorial">Click Here to View the Complete Video Tutorial</summary><br/>
 
 [Build with IDE and Docker](https://github.com/user-attachments/assets/2289e701-d39a-41b2-a87b-8b4551b1f468.mp4)
+
+[If the video does not play, click here](https://youtu.be/B2G2bWrTPBo)
 
 </details>
 </div>
@@ -672,9 +679,9 @@ For example, the application is launched on port **8080**
 Use **Admin** or **User** data for authorization. After authorization, you can test the application.
 
 <div align="center" style="font-size: x-large">
-<details><summary title="Click Here to View the Complete Video Tutorial">Click Here to View the Complete Video Tutorial</summary><br/>
-Click Here to View the Complete Video Tutorial
-</details>
+          
+[Click here for a tutorial video](https://youtu.be/ln06psfr2xs)
+
 </div>
 
 <div id="working-with-postman"></div>
@@ -689,22 +696,32 @@ target="_blank">View Postman Collection JSON on GitHub</a>
 <br>
 
 **Step 2.**
+
 Import the collection
 
 **Step 3.**
+
 Use **Admin** or **User** data for authorization. ***Postman*** is configured to use a **bearer token** to 
 access endpoints. After authorization, you receive a response **token**. Configure the collection: **base_url** 
 and **token**. ***Save the settings***. Now you can test the application.
+
 <div align="center" style="font-size: x-large">
 
-<details>
-  <summary>Click Here to View the Complete Video Tutorial</summary>
-          
-[Working with Postman](https://github.com/IvanovYurii/video/blob/main/Build-with-IDE-and-MySQL_compress_lv3.mp4)
-
-</details>
+[Click here for a tutorial video](https://youtu.be/olRkALT70BM)
 
 <div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
+
+</div>
+
+---
+
+<p id="tutorial-overview"></p>
+
+## <picture><img alt="Tutorial Overview" src="images/video-icon.png" style="vertical-align: middle;"></picture> Tutorial Overview
+
+<div align="center" style="font-size: x-large">
+          
+[Click Here to View the Complete Video Tutorial](https://www.youtube.com/playlist?list=PL-c-Y80JbWOfpfuNQY25Z-YzreKt9iVY1)
 
 </div>
 

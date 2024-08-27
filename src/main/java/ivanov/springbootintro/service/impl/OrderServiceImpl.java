@@ -23,6 +23,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,7 +62,8 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     @Override
     public OrderDto updateOrderStatus(Long orderId, UpdateStatusOrderRequestDto request) {
-        Order order = getOrderFromDb(orderId);
+        Order order = orderRepository.getOrderById(orderId).orElseThrow(
+                () -> new EntityNotFoundException("Can't find order by id=" + orderId));
         Order.Status newStatus = orderStatusFromRequest(request);
         order.setStatus(newStatus);
         orderRepository.save(order);
@@ -130,7 +132,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private Order getOrderFromDb(Long orderId) {
-        return orderRepository.findById(orderId).orElseThrow(
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return orderRepository.getOrderByIdAndUserId(orderId, user.getId()).orElseThrow(
                 () -> new EntityNotFoundException("Can't find order by id=" + orderId)
         );
     }

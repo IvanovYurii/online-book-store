@@ -771,6 +771,7 @@ A special thanks to my **teachers** and **mentors**. Their knowledge and guidanc
 [![Anton Kozhukhivskiy](images/Anton-Kozhukhivskiy.png "Anton Kozhukhivskiy")](https://github.com/kozhukhovsky)
 [![Sander Kapusniak](images/Sander-Kapusniak.png "Sander Kapusniak")](https://github.com/Sanderfuck)
 [![Olena Bruiako](images/Olena-Bruiako.png "Olena Bruiako")](https://github.com/Elena-Bruyako)
+[![Artur Sarakhman](images/Artur-Sarakhman.png "Artur Sarakhman")](https://github.com/sarakhmen)
 
 <div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
 </div>

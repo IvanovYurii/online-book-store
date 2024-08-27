@@ -135,10 +135,10 @@ No installation or setup required; simply use the project without spending time 
 
 **Base_url for *Postman***
 ```
-http://ec2-44-201-114-138.compute-1.amazonaws.com
+http://ec2-18-212-26-24.compute-1.amazonaws.com
 ```
 ***Swagger***
-> <a href="http://ec2-44-201-114-138.compute-1.amazonaws.com/swagger-ui/index.html#/" target="_blank">http://ec2-44-201-114-138.compute-1.amazonaws.com/swagger-ui/index.html#/</a>
+> <a href="http://ec2-18-212-26-24.compute-1.amazonaws.com/swagger-ui/index.html#/" target="_blank">http://ec2-18-212-26-24.compute-1.amazonaws.com/swagger-ui/index.html#/</a>
 
 <div style="border: 1px solid red; padding: 10px; background-color: #f8d7da; color: #721c24;">
 <strong>IMPORTANT:</strong>
